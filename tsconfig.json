@@ -9,6 +9,11 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
+    "paths": {
+      "ngx-bottom-sheet-modal": [
+        "./dist/ngx-bottom-sheet-modal"
+      ]
+    },
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
