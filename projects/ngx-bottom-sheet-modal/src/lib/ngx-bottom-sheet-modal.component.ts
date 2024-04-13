@@ -7,15 +7,16 @@ import {
   trigger,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
 import { NgxBottomSheetModalService } from './ngx-bottom-sheet-modal.service';
 
 @Component({
-  selector: 'lib-ngx-bottom-sheet-modal',
+  selector: 'ngx-bottom-sheet-modal',
   standalone: true,
   imports: [CommonModule],
+  host: { class: 'fixed z-40' },
   template: `
     <!-- container -->
     @if (content$ | async; as content) { @if (content.contentComponent) {
@@ -76,13 +77,19 @@ export class NgxBottomSheetModalComponent {
   private readonly router = inject(Router);
   protected readonly layersService = inject(NgxBottomSheetModalService);
 
-  constructor() {}
+  constructor(private el: ElementRef) {}
 
   // State
   content$ = this.layersService.layers$().pipe(
     map((layers) => layers),
     distinctUntilChanged()
   );
+
+  ngAfterViewInit() {
+    this.el.nativeElement.parentNode.classList.add('grid');
+    this.el.nativeElement.parentNode.classList.add('grid-cols-1');
+    this.el.nativeElement.parentNode.classList.add('grid-rows-1');
+  }
 
   close(): void {
     this.layersService.closeBottomSheet();
