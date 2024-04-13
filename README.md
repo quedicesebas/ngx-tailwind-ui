@@ -99,7 +99,20 @@ export class MenuItemComponent {
 
 As yoo can see, you can pass any data to the modal component using the `inputs` parameter of the `openBottomSheet` method. The data will be available in the modal component as `@Input` properties.
 
-4. Update Tailswind CSS config to include the `ngx-bottom-sheet-modal` styles. Add the following to the `content` section in your `tailwind.config.js` file:
+4. Provide animations in your `app.congif.ts` file:
+
+```
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    ...
+    provideAnimations(),
+  ],
+};
+```
+
+5. Update Tailswind CSS config to include the `ngx-bottom-sheet-modal` styles. Add the following to the `content` section in your `tailwind.config.js` file:
 
 ```
 /** @type {import('tailwindcss').Config} */
