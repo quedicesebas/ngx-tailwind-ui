@@ -2,6 +2,8 @@
 
 Simple bottom sheet modal for Angular, using Tailwind CSS.
 
+![Demo animation](https://raw.githubusercontent.com/quedicesebas/ngx-bottom-sheet-modal/main/projects/ngx-bottom-sheet-modal/demo.gif)
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
 ## Features
@@ -13,7 +15,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Demo
 
-View the [demo](https://angular-17-starter-project-rdvpgx.stackblitz.io)
+View the live [demo](https://stackblitz.com/edit/bottom-sheet-modal-demo)
 
 ## Prerrequisites
 
