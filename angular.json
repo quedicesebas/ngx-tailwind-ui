@@ -15,7 +15,6 @@
             "project": "projects/ngx-bottom-sheet-modal/ng-package.json"
           },
           "configurations": {
-            "assets": ["LICENSE"],
             "production": {
               "tsConfig": "projects/ngx-bottom-sheet-modal/tsconfig.lib.prod.json"
             },
