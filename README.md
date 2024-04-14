@@ -13,7 +13,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Demo
 
-Check the [Demo](https://angular-17-starter-project-rdvpgx.stackblitz.io)
+View the [demo](https://angular-17-starter-project-rdvpgx.stackblitz.io)
 
 ## Prerrequisites
 
