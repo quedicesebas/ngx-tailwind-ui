@@ -1,6 +1,18 @@
-<div class="p-4">
-  <h1 class="font-bold text-xl">{{ title }}</h1>
-  <p>{{ description }}</p>
-  <div class="border-b-2 my-2"></div>
-  <p>Tap outside to close.</p>
+<div class="py-4">
+  <div class="px-4">
+    <h1 class="font-bold text-xl">{{ title }}</h1>
+    <p>{{ description }}</p>
+  </div>
+  <p class="px-4 py-2 my-4 bg-slate-200">
+    ⓘ Tap outside or click button below to close.
+  </p>
+  <div class="px-4 flex justify-end">
+    <button
+      type="button"
+      (click)="close()"
+      class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+    >
+      Close
+    </button>
+  </div>
 </div>

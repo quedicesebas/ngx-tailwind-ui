@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
 
 @Component({
   selector: 'app-bottom-sheet-modal-content',
@@ -8,6 +9,16 @@ import { Component, Input } from '@angular/core';
   styleUrl: './bottom-sheet-modal-content.component.scss',
 })
 export class BottomSheetModalContentComponent {
+  // Services
+  private readonly ngxBottomSheetModalService = inject(
+    NgxBottomSheetModalService
+  );
+
+  // Inputs
   @Input() title!: string;
   @Input() description!: string;
+
+  close() {
+    this.ngxBottomSheetModalService.closeBottomSheet();
+  }
 }

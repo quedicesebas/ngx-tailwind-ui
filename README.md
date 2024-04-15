@@ -54,59 +54,88 @@ export class AppComponent {
 ### 1. Create a component with the modal content:
 
 ```typescript
-import { Component, Input } from "@angular/core";
+import { Component, Input, inject } from "@angular/core";
+import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
 
 @Component({
   selector: "app-modal-content-component",
   standalone: true,
   imports: [],
   template: `
-    <div class="p-4">
-      <h1 class="font-bold text-xl">{{ title }}</h1>
-      <p>{{ description }}</p>
-      <div class="border-b-2 my-2"></div>
-      <p>Tap outside to close.</p>
+    <div class="py-4">
+      <div class="px-4">
+        <h1 class="font-bold text-xl">{{ title }}</h1>
+        <p>{{ description }}</p>
+      </div>
+      <p class="px-4 py-2 my-4 bg-slate-200">ⓘ Tap outside or click button below to close.</p>
+      <div class="px-4 flex justify-end">
+        <button type="button" (click)="close()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Close</button>
+      </div>
     </div>
   `,
   styles: ``,
 })
 export class ModalContentComponent {
+  // Services
+  private readonly ngxBottomSheetModalService = inject(NgxBottomSheetModalService);
+
+  // Inputs
   @Input() title!: string;
   @Input() description!: string;
+
+  close() {
+    this.ngxBottomSheetModalService.closeBottomSheet();
+  }
 }
 ```
 
 ### 3. Modal trigger
 
-Inject the modal service to the component from which you want to open the modal. Now you can call `openBottomSheet` method any time you want to open the bottom sheet modal (passing the component class and optional inputs):
+Inject the modal service to the component from which you want to open the modal. Now you can call `openBottomSheet` method any time you want to open the bottom sheet modal (passing the component class, optional inputs and an optional callback function):
 
 ```typescript
-import { Component, inject } from '@angular/core';
-import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
-import { ModalContentComponent } from '../../../pages/menu-page/modal-content-component/modal-content-component.component';
-
-export DataType = {name: string, description: string};
+import { Component, inject } from "@angular/core";
+import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
+import { ModalContentComponent } from "./modal-content-component.component";
 
 @Component({
-  selector: 'app-menu-item',
+  selector: "app-menu-item",
   standalone: true,
-  templateUrl: './menu-item.component.html',
-  styleUrl: './menu-item.component.scss',
+  template: `
+    <div class="p-4">
+      <h1 class="font-bold text-xl mt-4 mb-2">
+        Angular bottom sheet modal demo
+        <span class="bg-gray-600 text-white rounded-full px-3 py-1 text-sm" [class]="{ 'bg-indigo-600': opened }">{{ opened ? "opened" : "closed" }}</span>
+      </h1>
+      <p class="mb-2">Simple bottom sheet modal for Angular, using Tailwind CSS.</p>
+      <button type="button" (click)="openBottomSheetModal()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Open Bottom sheet modal</button>
+    </div>
+  `,
+  styles: ``,
   imports: [],
 })
 export class MenuItemComponent {
   // Services
-  private readonly ngxBottomSheetModalService = inject(
-    NgxBottomSheetModalService,
-  );
+  private readonly ngxBottomSheetModalService = inject(NgxBottomSheetModalService);
+
+  // State
+  opened: boolean = false;
 
   constructor() {}
 
-  showModal(data: DataType) {
+  openBottomSheetModal() {
     this.ngxBottomSheetModalService.openBottomSheet({
       contentComponent: ModalContentComponent,
       inputs: data,
+      inputs: {
+        title: "My modal",
+        description: "A simple bottom sheet modal :)",
+      },
+      onClose: () => {
+        this.opened = false;
+      },
     });
+    this.opened = true;
   }
 }
 ```

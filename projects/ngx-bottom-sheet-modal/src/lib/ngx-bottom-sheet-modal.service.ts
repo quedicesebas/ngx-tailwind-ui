@@ -38,8 +38,12 @@ export class NgxBottomSheetModalService {
     });
   }
 
+  /**
+   * Closes the modal with the given parameters
+   */
   closeBottomSheet(): void {
     this.document.body.classList.remove('overflow-hidden');
+    this.getLayersCurrentValue().onClose?.();
     this.layersSource$.next({
       ...this.getLayersCurrentValue(),
       contentComponent: null,

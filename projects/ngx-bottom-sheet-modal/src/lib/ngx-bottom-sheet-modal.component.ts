@@ -75,16 +75,11 @@ export class NgxBottomSheetModalComponent {
   // Services
   protected readonly layersService = inject(NgxBottomSheetModalService);
 
-  private onClose?: () => void;
-
   constructor(private el: ElementRef) {}
 
   // State
   content$ = this.layersService.layers$().pipe(
-    map((layers) => {
-      this.onClose = layers.onClose;
-      return layers;
-    }),
+    map((layers) => layers),
     distinctUntilChanged()
   );
 
@@ -95,7 +90,6 @@ export class NgxBottomSheetModalComponent {
   }
 
   close(): void {
-    if (this.onClose) this.onClose();
     this.layersService.closeBottomSheet();
   }
 }

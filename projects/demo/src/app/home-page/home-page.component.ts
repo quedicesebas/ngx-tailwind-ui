@@ -10,10 +10,12 @@ import { BottomSheetModalContentComponent } from '../bottom-sheet-modal-content/
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
+  // Services
   private readonly ngxBottomSheetModalService = inject(
     NgxBottomSheetModalService
   );
 
+  // State
   opened: boolean = false;
 
   openBottomSheetModal() {
