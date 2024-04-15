@@ -14,6 +14,8 @@ export class HomePageComponent {
     NgxBottomSheetModalService
   );
 
+  opened: boolean = false;
+
   openBottomSheetModal() {
     this.ngxBottomSheetModalService.openBottomSheet({
       contentComponent: BottomSheetModalContentComponent,
@@ -21,6 +23,10 @@ export class HomePageComponent {
         title: 'My modal',
         description: 'A simple bottom sheet modal :)',
       },
+      onClose: () => {
+        this.opened = false;
+      },
     });
+    this.opened = true;
   }
 }

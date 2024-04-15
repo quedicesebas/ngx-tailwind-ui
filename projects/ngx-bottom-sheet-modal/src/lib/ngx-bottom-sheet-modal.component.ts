@@ -8,7 +8,6 @@ import {
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
 import { NgxBottomSheetModalService } from './ngx-bottom-sheet-modal.service';
 
@@ -74,14 +73,18 @@ import { NgxBottomSheetModalService } from './ngx-bottom-sheet-modal.service';
 })
 export class NgxBottomSheetModalComponent {
   // Services
-  private readonly router = inject(Router);
   protected readonly layersService = inject(NgxBottomSheetModalService);
+
+  private onClose?: () => void;
 
   constructor(private el: ElementRef) {}
 
   // State
   content$ = this.layersService.layers$().pipe(
-    map((layers) => layers),
+    map((layers) => {
+      this.onClose = layers.onClose;
+      return layers;
+    }),
     distinctUntilChanged()
   );
 
@@ -92,7 +95,7 @@ export class NgxBottomSheetModalComponent {
   }
 
   close(): void {
+    if (this.onClose) this.onClose();
     this.layersService.closeBottomSheet();
-    this.router.navigate(['/', 'menu']); // TODO
   }
 }
