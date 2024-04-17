@@ -28,6 +28,8 @@ export class HomePageComponent {
       onClose: () => {
         this.opened = false;
       },
+      showCloseButton: true,
+      closeButtonClass: 'text-indigo-400',
     });
     this.opened = true;
   }

@@ -91,7 +91,17 @@ export class ModalContentComponent {
 
 ### 3. Modal trigger
 
-Inject the modal service to the component from which you want to open the modal. Now you can call `openBottomSheet` method any time you want to open the bottom sheet modal (passing the component class, optional inputs and an optional callback function):
+Inject the modal service to the component from which you want to open the modal. Now you can call `openBottomSheet` method any time you want to open the bottom sheet modal, using the `NgxBottomSheetModalConfig` object.
+
+#### NgxBottomSheetModalConfig
+
+| Name             | Required | Type                    | Default       | Description                                                                                                    |
+| ---------------- | -------- | ----------------------- | ------------- | -------------------------------------------------------------------------------------------------------------- |
+| contentComponent | true     | Type<any>               |               | Content component class                                                                                        |
+| inputs           | false    | Record<string, unknown> |               | An object containing the data. Each property of it can be mapped as an input property in the content component |
+| onClose          | false    | () => void              |               | Callback function to be called when the modal is closed by the user                                            |
+| showCloseButton  | false    | boolean                 | false         | Show a close icon button in the top-rigth corner of the bottom sheet modal                                     |
+| closeButtonClass | false    | string                  | text-gray-500 | Close icon button class                                                                                        |
 
 ```typescript
 import { Component, inject } from "@angular/core";
@@ -134,6 +144,8 @@ export class MenuItemComponent {
       onClose: () => {
         this.opened = false;
       },
+      showCloseButton: true,
+      closeButtonClass: "text-indigo-400",
     });
     this.opened = true;
   }

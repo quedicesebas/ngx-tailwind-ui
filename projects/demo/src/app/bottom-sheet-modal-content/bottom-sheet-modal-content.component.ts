@@ -18,6 +18,9 @@ export class BottomSheetModalContentComponent {
   @Input() title!: string;
   @Input() description!: string;
 
+  // State
+  expandedContent: boolean = false;
+
   close() {
     this.ngxBottomSheetModalService.closeBottomSheet();
   }

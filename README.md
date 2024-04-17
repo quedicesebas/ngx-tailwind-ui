@@ -62,13 +62,29 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
   standalone: true,
   imports: [],
   template: `
-    <div class="py-4">
+    <div class="pt-4">
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title }}</h1>
         <p>{{ description }}</p>
       </div>
-      <p class="px-4 py-2 my-4 bg-slate-200">ⓘ Tap outside or click button below to close.</p>
-      <div class="px-4 flex justify-end">
+      <p class="px-4 py-2 mt-4 bg-slate-200">ⓘ Tap outside or click button below to close.</p>
+      <div class="px-4 overflow-auto max-h-96">
+        <p class="pt-4 font-semibold" (click)="expandedContent = !expandedContent">
+          {{ expandedContent ? "Show less content [-]" : "Show  more content [+]" }}
+        </p>
+        @if(expandedContent) {
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-8">Some text to show back scroll</p>
+        }
+      </div>
+      <div class="p-4 flex justify-end sticky bottom-0 bg-white border-t-2 w-full md:rounded-b-xl">
         <button type="button" (click)="close()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Close</button>
       </div>
     </div>
@@ -83,6 +99,9 @@ export class ModalContentComponent {
   @Input() title!: string;
   @Input() description!: string;
 
+  // State
+  expandedContent: boolean = false;
+
   close() {
     this.ngxBottomSheetModalService.closeBottomSheet();
   }
@@ -91,7 +110,17 @@ export class ModalContentComponent {
 
 ### 3. Modal trigger
 
-Inject the modal service to the component from which you want to open the modal. Now you can call `openBottomSheet` method any time you want to open the bottom sheet modal (passing the component class, optional inputs and an optional callback function):
+Inject the modal service to the component from which you want to open the modal. Now you can call `openBottomSheet` method any time you want to open the bottom sheet modal, using the `NgxBottomSheetModalConfig` object.
+
+#### NgxBottomSheetModalConfig
+
+| Name             | Required | Type                    | Default       | Description                                                                                                    |
+| ---------------- | -------- | ----------------------- | ------------- | -------------------------------------------------------------------------------------------------------------- |
+| contentComponent | true     | Type<any>               |               | Content component class                                                                                        |
+| inputs           | false    | Record<string, unknown> |               | An object containing the data. Each property of it can be mapped as an input property in the content component |
+| onClose          | false    | () => void              |               | Callback function to be called when the modal is closed by the user                                            |
+| showCloseButton  | false    | boolean                 | false         | Show a close icon button in the top-rigth corner of the bottom sheet modal                                     |
+| closeButtonClass | false    | string                  | text-gray-500 | Close icon button class                                                                                        |
 
 ```typescript
 import { Component, inject } from "@angular/core";
@@ -134,6 +163,8 @@ export class MenuItemComponent {
       onClose: () => {
         this.opened = false;
       },
+      showCloseButton: true,
+      closeButtonClass: "text-indigo-400",
     });
     this.opened = true;
   }

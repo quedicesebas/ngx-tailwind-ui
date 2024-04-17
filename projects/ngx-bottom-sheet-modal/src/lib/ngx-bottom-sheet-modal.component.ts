@@ -7,39 +7,23 @@ import {
   trigger,
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { distinctUntilChanged, map } from 'rxjs';
 import { NgxBottomSheetModalService } from './ngx-bottom-sheet-modal.service';
+import { SafeResizeObserver } from './safe-resize-observer';
 
 @Component({
   selector: 'ngx-bottom-sheet-modal',
   standalone: true,
   imports: [CommonModule],
   host: { class: 'fixed z-40' },
-  template: `
-    <!-- container -->
-    @if (content$ | async; as content) { @if (content.contentComponent) {
-    <div @container class="relative grid h-dvh grid-cols-1 grid-rows-1">
-      <!-- shade -->
-      <div
-        @fade
-        class="col-span-1 col-start-1 row-span-1 row-start-1 w-svw bg-black bg-opacity-60"
-        (click)="close()"
-        aria-hidden="true"
-      ></div>
-
-      <!-- bottom sheet -->
-      <div
-        @slideUp
-        class="z-10 col-span-1 col-start-1 row-span-1 row-start-1 self-end rounded-t-xl bg-white md:absolute md:bottom-0 md:left-0 md:right-0 md:top-0 md:m-auto md:w-11/12 md:max-w-5xl md:rounded-xl lg:w-2/3"
-      >
-        <ng-container
-          *ngComponentOutlet="content.contentComponent; inputs: content.inputs"
-        />
-      </div>
-    </div>
-    } }
-  `,
+  templateUrl: './ngx-bottom-sheet-modal.component.html',
   styles: ``,
   animations: [
     trigger('fade', [
@@ -75,7 +59,11 @@ export class NgxBottomSheetModalComponent {
   // Services
   protected readonly layersService = inject(NgxBottomSheetModalService);
 
-  constructor(private el: ElementRef) {}
+  @ViewChild('bottomSheet') bottomSheet!: ElementRef;
+  observer!: ResizeObserver;
+  fullScreen: boolean = false;
+
+  constructor(private el: ElementRef, private zone: NgZone) {}
 
   // State
   content$ = this.layersService.layers$().pipe(
@@ -84,9 +72,35 @@ export class NgxBottomSheetModalComponent {
   );
 
   ngAfterViewInit() {
+    // Listen to resize event to check if bottom sheet is full screen and set the fullScreen property. In mobile, fullScreen=true removes round borders of the botton sheet and set the close icon button position to fixed.
+    this.observer = new SafeResizeObserver((entries: any) => {
+      this.zone.run(() => {
+        if (entries[0].contentRect.height >= this.el.nativeElement.offsetHeight)
+          this.fullScreen = true;
+        else this.fullScreen = false;
+      });
+    });
+    this.content$.pipe().subscribe((content) => {
+      if (content.contentComponent) {
+        let attempts = 0;
+        const intervalId = setInterval(() => {
+          if (this.bottomSheet) {
+            this.observer.observe(this.bottomSheet.nativeElement);
+          }
+          if (this.bottomSheet || attempts > 9) clearInterval(intervalId);
+          else attempts++;
+        }, 100);
+      } else this.observer?.disconnect();
+    });
+
+    // Sets container required clasess for bottom sheet modal positioning
     this.el.nativeElement.parentNode.classList.add('grid');
     this.el.nativeElement.parentNode.classList.add('grid-cols-1');
     this.el.nativeElement.parentNode.classList.add('grid-rows-1');
+  }
+
+  ngOnDestroy() {
+    this.observer?.disconnect();
   }
 
   close(): void {

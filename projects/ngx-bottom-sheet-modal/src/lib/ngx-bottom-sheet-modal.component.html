@@ -1,0 +1,48 @@
+@if (content$ | async; as content) { @if (content.contentComponent) {
+<!-- container -->
+<div @container class="relative grid h-dvh grid-cols-1 grid-rows-1">
+  <!-- shade -->
+  <div
+    @fade
+    class="col-span-1 col-start-1 row-span-1 row-start-1 w-svw bg-black bg-opacity-60"
+    (click)="close()"
+    aria-hidden="true"
+  ></div>
+
+  <!-- bottom sheet -->
+  <div
+    @slideUp
+    class="z-10 col-span-1 col-start-1 row-span-1 row-start-1 self-end bg-white md:absolute md:bottom-0 md:left-0 md:right-0 md:top-0 md:m-auto md:w-11/12 md:max-w-5xl md:rounded-xl lg:w-2/3 relative max-h-screen md:max-h-[90dvh] overflow-auto"
+    [class.rounded-t-none]="fullScreen"
+    [class.rounded-t-xl]="!fullScreen"
+    #bottomSheet
+  >
+    <ng-container
+      *ngComponentOutlet="content.contentComponent; inputs: content.inputs"
+    />
+    @if (content.showCloseButton) {
+    <button
+      class="top-2 right-2"
+      [class.fixed]="fullScreen"
+      [class.absolute]="!fullScreen"
+      [class]="content.closeButtonClass ?? 'text-gray-500'"
+      (click)="close()"
+    >
+      <svg
+        data-testid="close"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3a.996.996 0 01-1.41 0L12 13.41 9.11 16.3a.996.996 0 11-1.41-1.41L10.59 12 7.7 9.11A.996.996 0 119.11 7.7L12 10.59l2.89-2.89a.996.996 0 111.41 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"
+        ></path>
+      </svg>
+    </button>
+    }
+  </div>
+</div>
+} }

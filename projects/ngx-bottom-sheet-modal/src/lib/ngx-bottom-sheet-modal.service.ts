@@ -9,6 +9,10 @@ export interface NgxBottomSheetModalConfig {
   inputs?: Record<string, unknown>;
   /** Callback function to be called when the modal is closed by the user */
   onClose?: () => void;
+  /** Show a close icon button in the top-rigth corner of the bottom sheet modal */
+  showCloseButton?: boolean;
+  /** Close icon button class */
+  closeButtonClass?: string;
 }
 
 @Injectable({
@@ -49,6 +53,8 @@ export class NgxBottomSheetModalService {
       contentComponent: null,
       inputs: undefined,
       onClose: undefined,
+      showCloseButton: false,
+      closeButtonClass: undefined,
     });
   }
 
