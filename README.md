@@ -68,7 +68,7 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
         <p>{{ description }}</p>
       </div>
       <p class="px-4 py-2 mt-4 bg-slate-200">ⓘ Tap outside or click button below to close.</p>
-      <div class="px-4 overflow-auto max-h-96">
+      <div class="px-4 overflow-auto md:max-h-96">
         <p class="pt-4 font-semibold" (click)="expandedContent = !expandedContent">
           {{ expandedContent ? "Show less content [-]" : "Show  more content [+]" }}
         </p>
