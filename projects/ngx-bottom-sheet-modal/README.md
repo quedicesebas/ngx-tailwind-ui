@@ -62,7 +62,7 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
   standalone: true,
   imports: [],
   template: `
-    <div class="pt-4">
+    <div class="pt-4 overflow-auto max-h-screen md:overflow-hidden">
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title }}</h1>
         <p>{{ description }}</p>
