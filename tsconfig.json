@@ -10,6 +10,9 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "paths": {
+      "ngx-phonenumbers": [
+        "./dist/ngx-phonenumbers"
+      ],
       "ngx-bottom-sheet-modal": [
         "./dist/ngx-bottom-sheet-modal"
       ]

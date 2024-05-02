@@ -74,7 +74,7 @@ const initialValue = {
           <input
             type="text"
             placeholder="Phone number"
-            class="px-6 pl-20 w-full text-xl font-medium h-full rounded-full bg-white dark:bg-cyan-700 dark:text-slate-200 placeholder-cyan-950"
+            class="px-6 pl-20 w-full text-xl font-medium h-full rounded-full bg-white dark:bg-transparent dark:text-slate-200 placeholder-cyan-700"
             id="phoneWithCountry"
             name="phoneWithCountry"
             [(ngModel)]="demo.phoneWithCountry"
@@ -115,7 +115,7 @@ const initialValue = {
           <input
             type="tel"
             placeholder="Phone number"
-            class="px-6 w-full text-xl font-medium h-full rounded-full bg-white dark:bg-cyan-700 dark:text-slate-200 placeholder-cyan-950"
+            class="px-6 w-full text-xl font-medium h-full rounded-full bg-white dark:bg-transparent dark:text-slate-200 placeholder-cyan-700"
             id="phone"
             name="phone"
             [(ngModel)]="demo.phone"
@@ -188,7 +188,7 @@ export class PhonenumbersPageComponent {
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title }}</h1>
       </div>
-      <p class="px-4 py-2 mt-4 bg-cyan-200 dark:bg-cyan-400">
+      <p class="px-4 py-2 mt-4 bg-cyan-200 dark:bg-cyan-700">
         ⓘ {{ description }}
       </p>
     </div>

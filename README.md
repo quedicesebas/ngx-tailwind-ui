@@ -5,6 +5,7 @@ Easy to use and simple components, directives and services. Using last Angular a
 Packages:
 
 - [ngx-bottom-sheet-modal](https://github.com/quedicesebas/angular-tailwind-ui/blob/main/projects/ngx-bottom-sheet-modal/README.md)
+- [ngx-phonenumbers](https://github.com/quedicesebas/angular-tailwind-ui/blob/main/projects/ngx-phonenumbers/README.md)
 
 ## ngx-bottom-sheet-modal
 

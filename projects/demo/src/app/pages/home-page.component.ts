@@ -46,6 +46,9 @@ import { RouterLink } from '@angular/router';
         <li class="py-2 px-4">
           <a routerLink="/ngx-bottom-sheeet-modal">ngx-bottom-sheet-modal</a>
         </li>
+        <li class="py-2 px-4">
+          <a routerLink="/ngx-phonenumbers">ngx-phonenumbers</a>
+        </li>
       </ul>
     </section>
   `,
