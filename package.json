@@ -1,11 +1,13 @@
 {
-  "name": "angular-utils",
+  "name": "angular-tailwind-ui",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --project=demo --port=4201",
-    "build": "ng build ngx-bottom-sheet-modal",
-    "watch": "ng build ngx-bottom-sheet-modal --watch --configuration development",
+    "build:modal": "ng build ngx-bottom-sheet-modal",
+    "watch:modal": "ng build ngx-bottom-sheet-modal --watch --configuration development",
+    "build:phone": "ng build ngx-phonenumbers",
+    "watch:phone": "ng build ngx-phonenumbers --watch --configuration development",
     "test": "ng test",
     "serve:ssr:demo": "node dist/demo/server/server.mjs"
   },
@@ -21,6 +23,7 @@
     "@angular/platform-server": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@angular/ssr": "^17.3.4",
+    "awesome-phonenumber": "^6.8.0",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -1,9 +1,9 @@
 {
   "name": "ngx-bottom-sheet-modal",
-  "version": "0.3.3",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/quedicesebas/ngx-bottom-sheet-modal.git"
+    "url": "https://github.com/quedicesebas/angular-tailwind-ui.git"
   },
   "license": "MIT",
   "keywords": [

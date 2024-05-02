@@ -1,4 +1,4 @@
-# NgxBottomSheetModal
+# ngx-bottom-sheet-modal
 
 Simple bottom sheet modal for Angular, using Tailwind CSS.
 
@@ -15,7 +15,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Demo
 
-View the live [demo](https://stackblitz.com/edit/bottom-sheet-modal-demo)
+View the live [demo](https://stackblitz.com/edit/ngx-bottom-sheet-modal-demo)
 
 ## Prerrequisites
 
@@ -62,12 +62,12 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
   standalone: true,
   imports: [],
   template: `
-    <div class="pt-4 overflow-auto max-h-screen md:overflow-hidden">
+    <div class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white">
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title }}</h1>
         <p>{{ description }}</p>
       </div>
-      <p class="px-4 py-2 mt-4 bg-slate-200">ⓘ Tap outside or click button below to close.</p>
+      <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">ⓘ Tap outside or click button below to close.</p>
       <div class="px-4 overflow-auto md:max-h-96">
         <p class="pt-4 font-semibold" (click)="expandedContent = !expandedContent">
           {{ expandedContent ? "Show less content [-]" : "Show  more content [+]" }}
@@ -84,8 +84,8 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
         <p class="py-8">Some text to show back scroll</p>
         }
       </div>
-      <div class="p-4 flex justify-end sticky bottom-0 bg-white border-t-2 w-full md:rounded-b-xl">
-        <button type="button" (click)="close()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Close</button>
+      <div class="p-4 flex justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 w-full md:rounded-b-xl">
+        <button type="button" (click)="close()" class="bg-cyan-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Close</button>
       </div>
     </div>
   `,
@@ -134,10 +134,10 @@ import { ModalContentComponent } from "./modal-content-component.component";
     <div class="p-4">
       <h1 class="font-bold text-xl mt-4 mb-2">
         Angular bottom sheet modal demo
-        <span class="bg-gray-600 text-white rounded-full px-3 py-1 text-sm" [class]="{ 'bg-indigo-600': opened }">{{ opened ? "opened" : "closed" }}</span>
+        <span class="bg-gray-600 text-white rounded-full px-3 py-1 text-sm" [class]="{ 'bg-cyan-600': opened }">{{ opened ? "opened" : "closed" }}</span>
       </h1>
       <p class="mb-2">Simple bottom sheet modal for Angular, using Tailwind CSS.</p>
-      <button type="button" (click)="openBottomSheetModal()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Open Bottom sheet modal</button>
+      <button type="button" (click)="openBottomSheetModal()" class="bg-cyan-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Open Bottom sheet modal</button>
     </div>
   `,
   styles: ``,
@@ -164,7 +164,7 @@ export class MenuItemComponent {
         this.opened = false;
       },
       showCloseButton: true,
-      closeButtonClass: "text-indigo-400",
+      closeButtonClass: "text-cyan-400",
     });
     this.opened = true;
   }
