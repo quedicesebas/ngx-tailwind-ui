@@ -7,30 +7,46 @@ import { ParsedPhoneNumber, parsePhoneNumber } from 'awesome-phonenumber';
 export class NgxPhonenumbersService {
   constructor() {}
 
-  validate(
-    phoneText: string,
-    countryCode: string,
+  /**
+   * Tries to parse the provided phone number as received with an optional constry code (ignored if phone number starts witn a '+'). If that fails, tries to parse it adding a '+' at the begining. If not, tries to parse it with the default country code. If everything fails, returns the original phone number parse result.
+   * @param phoneNumber
+   * @param countryCode
+   * @param defaultCountryCode
+   * @returns ParsedPhoneNumber
+   */
+  parseWithDefaultCountry(
+    phoneNumber: string,
+    countryCode?: string,
     defaultCountryCode?: string
   ): ParsedPhoneNumber {
-    var parsedPhone = this.parse(phoneText, countryCode);
-    if (!parsedPhone.valid && !countryCode) {
-      parsedPhone = this.parse('+' + phoneText, countryCode);
+    var parsedPhoneNumber = this.parse(phoneNumber, countryCode);
+    if (!parsedPhoneNumber.valid && !countryCode) {
+      var parsedPhoneNumberTemp = this.parse('+' + phoneNumber);
+      parsedPhoneNumber = parsedPhoneNumberTemp.valid
+        ? parsedPhoneNumberTemp
+        : parsedPhoneNumber;
     }
-    if (!parsedPhone.valid && defaultCountryCode) {
-      parsedPhone = this.parse(phoneText, defaultCountryCode);
+    if (!parsedPhoneNumber.valid && defaultCountryCode) {
+      var parsedPhoneNumberTemp = this.parse(phoneNumber, defaultCountryCode);
+      parsedPhoneNumber = parsedPhoneNumberTemp.valid
+        ? parsedPhoneNumberTemp
+        : parsedPhoneNumber;
     }
-    return parsedPhone;
+    return parsedPhoneNumber;
   }
 
-  parse(phoneText: string, countryCode: string): ParsedPhoneNumber {
-    phoneText = phoneText.trim();
-    countryCode = countryCode.trim().replace('+', '');
+  /**
+   * Parses a phone number using the awesome-phonenumber library (a JavaScript wrapper for Google libphonenumber). Ignores the country code when the phone number starts with a +.
+   * @param phoneNumber
+   * @param countryCode
+   * @returns ParsedPhoneNumber
+   */
+  parse(phoneNumber: string, countryCode?: string): ParsedPhoneNumber {
+    phoneNumber = phoneNumber.trim();
     return parsePhoneNumber(
-      phoneText.startsWith('+')
-        ? phoneText
-        : countryCode
-        ? '+' + countryCode + phoneText
-        : phoneText
+      phoneNumber.startsWith('+') || !countryCode
+        ? phoneNumber
+        : '+' + countryCode.trim().replace('+', '') + phoneNumber
     );
   }
 }

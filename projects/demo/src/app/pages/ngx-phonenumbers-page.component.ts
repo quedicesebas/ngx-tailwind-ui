@@ -13,7 +13,6 @@ const initialValue = {
 @Component({
   selector: 'app-ngx-phonenumbers-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgxPhonenumbersDirective],
   template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
       <ol
@@ -79,10 +78,9 @@ const initialValue = {
             name="phoneWithCountry"
             [(ngModel)]="demo.phoneWithCountry"
             required
-            ngxPhonenumbers
+            ngxPhonenumber
             defaultCountryCode="+57"
             [countryCodeControl]="countryCode.control"
-            type="text"
             #phoneWithCountry="ngModel"
           /><input
             type="text"
@@ -120,7 +118,7 @@ const initialValue = {
             name="phone"
             [(ngModel)]="demo.phone"
             required
-            ngxPhonenumbers
+            ngxPhonenumber
             defaultCountryCode="+57"
             type="text"
             #phone="ngModel"
@@ -141,6 +139,7 @@ const initialValue = {
           <button
             type="submit"
             class="text-center py-2 px-6 rounded-full button-shadow flex items-center space-x-2 text-2xl font-semibold bg-aquamarine-blue-500 bg-cyan-500 text-white"
+            [class.opacity-50]="!demoForm.form.valid"
             [disabled]="!demoForm.form.valid"
           >
             Send
@@ -150,6 +149,7 @@ const initialValue = {
     </div>
   `,
   styles: ``,
+  imports: [CommonModule, FormsModule, NgxPhonenumbersDirective],
 })
 export class PhonenumbersPageComponent {
   // Services
@@ -159,7 +159,6 @@ export class PhonenumbersPageComponent {
 
   demo: { phoneWithCountry: string; phone: string; countryCode: string } =
     initialValue;
-  countryCodeListOpened: boolean = false;
 
   submit() {
     this.ngxBottomSheetModalService.openBottomSheet({

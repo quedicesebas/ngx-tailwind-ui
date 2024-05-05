@@ -1,25 +1,66 @@
 # ngx-phonenumbers
 
+Directive validator and service to handle phone numbers with Google libphonenumber library.
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name --project ngx-phonenumbers` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-phonenumbers`.
+- Standalone validator directive
+- Easy to integrate with the Angular template-driven forms
+- Parse and format phone numbers with Google libphonenumber library
+- When the phone number is valid, replace it with the formatted international number or country code plus national number. When invalid, set the 'phoneNumber' error.
 
-> Note: Don't forget to add `--project ngx-phonenumbers` or else it will be added to the default project in your `angular.json` file.
+## Demo
 
-## Build
+View the live [demo](https://stackblitz.com/edit/ngx-phonenumbers-demo)
 
-Run `ng build ngx-phonenumbers` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Installation
 
-## Publishing
+```shell
+npm install ngx-phonenumbers
+```
 
-After building your library with `ng build ngx-phonenumbers`, go to the dist folder `cd dist/ngx-phonenumbers` and run `npm publish`.
+## Usage
 
-## Running unit tests
+### 1. Import the standalone directive
 
-Run `ng test ngx-phonenumbers` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Add the `NgxPhonenumbersDirective` to your component imports. If not imported yet, add `CommonModule` and `FormsModule`.
 
-## Further help
+```typescript
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgxPhonenumbersDirective } from 'ngx-phonenumbers';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@Component({
+  selector: 'app-ngx-phonenumbers-page',
+  standalone: true,
+  template: ``,
+  styles: ``,
+  imports: [CommonModule, FormsModule, NgxPhonenumbersDirective],
+})
+```
+
+### 2. Add the directive to your input field
+
+You can use a single input for the full phone number:
+
+```html
+<input type="tel" placeholder="Phone number" id="phone" name="phone" [(ngModel)]="demo.phone" ngxPhonenumber defaultCountryCode="57" type="text" #phone="ngModel" />
+```
+
+Or use two inputs, one for the national part of the number an other for the country code (binding it with the `countryCodeControl` input).
+
+```html
+<input type="text" placeholder="+57" id="countryCode" name="countryCode" [(ngModel)]="demo.countryCode" #countryCode="ngModel" />
+```
+
+```html
+<input type="text" placeholder="Phone number" id="phoneWithCountry" name="phoneWithCountry" [(ngModel)]="demo.phoneWithCountry" ngxPhonenumber defaultCountryCode="+57" [countryCodeControl]="countryCode.control" #phoneWithCountry="ngModel" />
+```
+
+The `defaultCountryCode` should be the 2 letter ISO code. You can include or not the '+'.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/quedicesebas/angular-tailwind-ui/main/LICENSE) file for details.

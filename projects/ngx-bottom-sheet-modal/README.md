@@ -2,7 +2,7 @@
 
 Simple bottom sheet modal for Angular, using Tailwind CSS.
 
-![Demo animation](https://raw.githubusercontent.com/quedicesebas/angular-tailwind-ui/main/demo.gif)
+![Demo animation](https://raw.githubusercontent.com/quedicesebas/angular-tailwind-ui/main/projects/ngx-bottom-sheet-modal/demo.gif)
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
@@ -29,7 +29,7 @@ npm install ngx-bottom-sheet-modal
 
 ## Usage
 
-1. Add the bottom sheet modal wrapper to your app root. Import it into your component definition and add it to the end of the template:
+### 1. Add the bottom sheet modal wrapper to your app root. Import it into your component definition and add it to the end of the template:
 
 ```typescript
 import { Component } from '@angular/core';
@@ -51,7 +51,7 @@ export class AppComponent {
 }
 ```
 
-### 1. Create a component with the modal content:
+### 2. Create a component with the modal content:
 
 ```typescript
 import { Component, Input, inject } from "@angular/core";
@@ -202,4 +202,4 @@ module.exports = {
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/quedicesebas/ngx-bottom-sheet-modal/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/quedicesebas/angular-tailwind-ui/main/LICENSE) file for details.

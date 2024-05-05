@@ -10,7 +10,7 @@ import {
 import { NgxPhonenumbersService } from './ngx-phonenumbers.service';
 
 @Directive({
-  selector: '[ngxPhonenumbers]',
+  selector: '[ngxPhonenumber]',
   standalone: true,
   providers: [
     {
@@ -46,13 +46,12 @@ export function phoneNumberValidator(
 ): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value) {
-      const validatedPhone = phoneNumberValidationService.validate(
-        control.value,
-        countryCodeControl && countryCodeControl.value
-          ? countryCodeControl.value
-          : '',
-        defaultCountryCode
-      );
+      const validatedPhone =
+        phoneNumberValidationService.parseWithDefaultCountry(
+          control.value,
+          countryCodeControl?.value,
+          defaultCountryCode
+        );
       if (validatedPhone.valid) {
         if (countryCodeControl) {
           if (validatedPhone.number?.national != control.value) {
