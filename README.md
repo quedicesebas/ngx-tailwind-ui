@@ -35,6 +35,8 @@ npm install ngx-phonenumbers
 - Parse and format phone numbers with Google libphonenumber library
 - When the phone number is valid, replace it with the formatted international number or country code plus national number. When invalid, set the 'phoneNumber' error.
 
+Go to [ngx-phonenumbers documentation](https://github.com/quedicesebas/angular-tailwind-ui/blob/main/projects/ngx-phonenumbers/README.md)
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/quedicesebas/angular-tailwind-ui/main/LICENSE) file for details.

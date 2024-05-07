@@ -182,7 +182,7 @@ export class PhonenumbersPageComponent {
   imports: [],
   template: `
     <div
-      class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-950 dark:text-white"
+      class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-950 dark:text-white md:w-96"
     >
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title }}</h1>

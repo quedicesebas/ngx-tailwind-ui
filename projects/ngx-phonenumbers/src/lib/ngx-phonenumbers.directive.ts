@@ -55,18 +55,16 @@ export function phoneNumberValidator(
       if (validatedPhone.valid) {
         if (countryCodeControl) {
           if (validatedPhone.number?.national != control.value) {
-            control.setValue(validatedPhone.number?.national);
+            control.setValueAndNoValidate(validatedPhone.number?.national);
           }
           if (
             validatedPhone.countryCode &&
             validatedPhone.countryCode != countryCodeControl.value
           ) {
-            countryCodeControl.setValue('+' + validatedPhone.countryCode, {
-              emitEvent: false,
-            });
+            countryCodeControl.setValue('+' + validatedPhone.countryCode);
           }
         } else if (validatedPhone.number?.international != control.value) {
-          control.setValue(validatedPhone.number?.international);
+          control.setValueAndNoValidate(validatedPhone.number?.international);
         }
       } else {
         return { phoneNumber: { value: true } };
