@@ -7,7 +7,7 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
   imports: [],
   template: `
     <div
-      class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white"
+      class="pt-4 w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white"
     >
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title }}</h1>
@@ -18,7 +18,7 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
       </p>
       <div class="px-4 overflow-auto md:max-h-96">
         <p
-          class="pt-4 font-semibold"
+          class="pt-4 font-semibold  cursor-pointer"
           (click)="expandedContent = !expandedContent"
         >
           {{
