@@ -11,10 +11,11 @@ import {
   Component,
   ElementRef,
   NgZone,
-  ViewChild,
+  QueryList,
+  ViewChildren,
+  effect,
   inject,
 } from '@angular/core';
-import { distinctUntilChanged, map } from 'rxjs';
 import { NgxBottomSheetModalService } from './ngx-bottom-sheet-modal.service';
 import { SafeResizeObserver } from './safe-resize-observer';
 
@@ -59,38 +60,44 @@ export class NgxBottomSheetModalComponent {
   // Services
   protected readonly layersService = inject(NgxBottomSheetModalService);
 
-  @ViewChild('bottomSheet') bottomSheet!: ElementRef;
+  @ViewChildren('bottomSheet') bottomSheets!: QueryList<ElementRef>;
   observer!: ResizeObserver;
   fullScreen: boolean = false;
 
-  constructor(private el: ElementRef, private zone: NgZone) {}
-
   // State
-  content$ = this.layersService.layers$().pipe(
-    map((layers) => layers),
-    distinctUntilChanged()
-  );
+  modals = this.layersService.layers.asReadonly();
 
-  ngAfterViewInit() {
+  constructor(private el: ElementRef, private zone: NgZone) {
     // Listen to resize event to check if bottom sheet is full screen and set the fullScreen property. In mobile, fullScreen=true removes round borders of the botton sheet and set the close icon button position to fixed.
     this.observer = new SafeResizeObserver((entries: any) => {
       this.zone.run(() => {
-        if (entries[0].contentRect.height >= this.el.nativeElement.offsetHeight)
+        if (
+          entries[0].contentRect.height >= this.el.nativeElement.scrollHeight
+        ) {
           this.fullScreen = true;
-        else this.fullScreen = false;
+        } else {
+          this.fullScreen = false;
+        }
       });
     });
-    this.content$.pipe().subscribe((content) => {
-      if (content.contentComponent) {
+
+    // Listen to current layer changes and, as soon as the element reference is available, set the ResizeObserver
+    effect(() => {
+      if (this.layersService.currentLayer()) {
         let attempts = 0;
         const intervalId = setInterval(() => {
-          if (this.bottomSheet) {
-            this.observer.observe(this.bottomSheet.nativeElement);
+          if (this.bottomSheets) {
+            this.observer.observe(this.bottomSheets.last.nativeElement);
           }
-          if (this.bottomSheet || attempts > 9) clearInterval(intervalId);
-          else attempts++;
+          if (this.bottomSheets || attempts > 9) {
+            clearInterval(intervalId);
+          } else {
+            attempts++;
+          }
         }, 100);
-      } else this.observer?.disconnect();
+      } else {
+        this.observer?.disconnect();
+      }
     });
 
     // Sets container required clasess for bottom sheet modal positioning

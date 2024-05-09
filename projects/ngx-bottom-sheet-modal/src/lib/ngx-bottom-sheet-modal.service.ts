@@ -1,6 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Type } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Inject, Injectable, Type, computed, signal } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+const configDefaults = {
+  contentComponent: null,
+  canClose: true,
+  showCloseButton: true,
+  closeButtonClass: 'text-gray-500 dark:text-gray-300',
+};
 
 export interface NgxBottomSheetModalConfig {
   /** Content component class */
@@ -9,56 +16,54 @@ export interface NgxBottomSheetModalConfig {
   inputs?: Record<string, unknown>;
   /** Callback function to be called when the modal is closed by the user */
   onClose?: () => void;
-  /** Show a close icon button in the top-rigth corner of the bottom sheet modal */
+  /** Enable closing the modal, and shows de close button. Default: true */
+  canClose?: boolean;
+  /** Show a close icon button in the top-rigth corner of the bottom sheet modal. Default: true */
   showCloseButton?: boolean;
-  /** Close icon button class */
+  /** Close icon button class. Default: 'text-gray-500 dark:text-gray-300' */
   closeButtonClass?: string;
 }
-
 @Injectable({
   providedIn: 'root',
 })
 export class NgxBottomSheetModalService {
   private readonly layersSource$ =
-    new BehaviorSubject<NgxBottomSheetModalConfig>({
-      contentComponent: null,
-    });
+    new BehaviorSubject<NgxBottomSheetModalConfig>(configDefaults);
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  layers$(): Observable<NgxBottomSheetModalConfig> {
-    return this.layersSource$.asObservable();
-  }
+  layers = signal<NgxBottomSheetModalConfig[]>([]);
+  currentLayer = computed(() => this.getLast());
 
   /**
    * Opens the modal with the given parameters
-   * @param params NgxBottomSheetModalConfig
+   * @param config NgxBottomSheetModalConfig
    */
-  openBottomSheet(params: NgxBottomSheetModalConfig): void {
+  openBottomSheet(config: NgxBottomSheetModalConfig): void {
     this.document.body.classList.add('overflow-hidden');
-    this.layersSource$.next({
-      ...this.getLayersCurrentValue(),
-      ...params,
-    });
+    const next = {
+      ...configDefaults,
+      ...config,
+    };
+    // We use this instead of 'this.layers().push(next)' in order to 'effects' work
+    this.layers.update((value) => [...value, next]);
   }
 
   /**
    * Closes the modal with the given parameters
    */
   closeBottomSheet(): void {
-    this.document.body.classList.remove('overflow-hidden');
-    this.getLayersCurrentValue().onClose?.();
-    this.layersSource$.next({
-      ...this.getLayersCurrentValue(),
-      contentComponent: null,
-      inputs: undefined,
-      onClose: undefined,
-      showCloseButton: false,
-      closeButtonClass: undefined,
-    });
+    const last = this.getLast();
+    if (last) {
+      last.onClose?.();
+      // We use this instead of 'this.layers().pop()' in order to 'effects' work
+      this.layers.update((value) => value.slice(0, value.length - 1));
+    }
   }
 
-  private getLayersCurrentValue(): NgxBottomSheetModalConfig {
-    return this.layersSource$.getValue();
+  private getLast() {
+    return this.layers().length > 0
+      ? this.layers()[this.layers().length - 1]
+      : undefined;
   }
 }

@@ -10,7 +10,8 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 - Create clear and reusable modal components.
 - It creating managing modals painless and clearer.
-- Pass data to the modal and and implement any content you want
+- Pass data to the modal and implement any content you want
+- Open a modal from another. Stack several ones.
 - Responsive: displayed as bottom sheet on mobile and as modal dialog in desktop
 
 ## Demo
@@ -62,7 +63,7 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
   standalone: true,
   imports: [],
   template: `
-    <div class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white">
+    <div class="pt-4 lg:w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white">
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title }}</h1>
         <p>{{ description }}</p>
@@ -73,15 +74,10 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
           {{ expandedContent ? "Show less content [-]" : "Show  more content [+]" }}
         </p>
         @if(expandedContent) {
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
-        <p class="py-8">Some text to show back scroll</p>
+        <p class="py-24">Some text</p>
+        <p class="py-24">Some text</p>
+        <p class="py-24">Some text</p>
+        <p class="py-24">Some text</p>
         }
       </div>
       <div class="p-4 flex justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 w-full md:rounded-b-xl">
@@ -114,13 +110,14 @@ Inject the modal service to the component from which you want to open the modal.
 
 #### NgxBottomSheetModalConfig
 
-| Name             | Required | Type                    | Default       | Description                                                                                                    |
-| ---------------- | -------- | ----------------------- | ------------- | -------------------------------------------------------------------------------------------------------------- |
-| contentComponent | true     | Type<any>               |               | Content component class                                                                                        |
-| inputs           | false    | Record<string, unknown> |               | An object containing the data. Each property of it can be mapped as an input property in the content component |
-| onClose          | false    | () => void              |               | Callback function to be called when the modal is closed by the user                                            |
-| showCloseButton  | false    | boolean                 | false         | Show a close icon button in the top-rigth corner of the bottom sheet modal                                     |
-| closeButtonClass | false    | string                  | text-gray-500 | Close icon button class                                                                                        |
+| Name             | Required | Type                    | Default                          | Description                                                                                                           |
+| ---------------- | -------- | ----------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| contentComponent | true     | Type<any>               |                                  | Content component class                                                                                               |
+| inputs           | false    | Record<string, unknown> |                                  | An object containing the data. Each property of it can be mapped as an input property in the content component        |
+| onClose          | false    | () => void              |                                  | Callback function to be called when the modal is closed by the user                                                   |
+| canClose         | false    | boolean                 | true                             | Allows to close (dismiss) the modal tapping in the back shade                                                         |
+| showCloseButton  | false    | boolean                 | true                             | Show a close icon button in the top-rigth corner of the bottom sheet modal. Works only if `canClose` is set to `true` |
+| closeButtonClass | false    | string                  | text-gray-500 dark:text-gray-300 | Close icon button class                                                                                               |
 
 ```typescript
 import { Component, inject } from "@angular/core";
@@ -128,13 +125,13 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
 import { ModalContentComponent } from "./modal-content-component.component";
 
 @Component({
-  selector: "app-menu-item",
+  selector: "app-component",
   standalone: true,
   template: `
     <section class="dark:text-slate-300">
-      <h1 class="font-bold text-xl mt-4 mb-2">
+      <h1 class="font-bold text-xl mt-4 mb-4">
         Angular bottom sheet modal demo
-        <span class="bg-gray-600 text-white rounded-full px-3 py-1 text-sm" [class]="{ 'bg-cyan-600': opened }">{{ opened ? "opened" : "closed" }}</span>
+        <span class="bg-red-500 text-white rounded-full px-3 py-1 text-sm" [class.!bg-green-500]="opened">{{ opened ? "opened" : "closed" }}</span>
       </h1>
       <p class="mb-2">Simple bottom sheet modal for Angular, using Tailwind CSS.</p>
       <button type="button" (click)="openBottomSheetModal()" class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg">Open Bottom sheet modal</button>
@@ -163,7 +160,6 @@ export class BottomSheetModalPageComponent {
       onClose: () => {
         this.opened = false;
       },
-      showCloseButton: true,
       closeButtonClass: "text-cyan-400 dark:text-cyan-200",
     });
     this.opened = true;

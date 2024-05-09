@@ -56,37 +56,51 @@ import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-conte
       </ol>
     </nav>
     <section class="dark:text-slate-300">
-      <h1 class="font-bold text-xl mt-4 mb-2">
+      <h1 class="font-bold text-xl mt-4 mb-4">
         Angular bottom sheet modal demo
         <span
-          class="bg-gray-600 text-white rounded-full px-3 py-1 text-sm"
-          [class]="{ 'bg-cyan-600': opened }"
-          >{{ opened ? 'opened' : 'closed' }}</span
+          class="bg-red-500 text-white rounded-full px-3 py-1 text-sm"
+          [class.!bg-green-500]="opened()"
+          >{{ opened() ? 'opened' : 'closed' }}</span
         >
       </h1>
       <p class="mb-2">
         Simple bottom sheet modal for Angular, using Tailwind CSS.
       </p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <button
-        type="button"
-        (click)="openBottomSheetModal()"
-        class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg"
-      >
-        Open Bottom sheet modal
-      </button>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
-      <p class="py-8">Some text to show back scroll disabled</p>
+      <div class="flex flex-col gap-4 py-2 items-start">
+        <button
+          type="button"
+          (click)="openBottomSheetModalClose()"
+          class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg"
+        >
+          Open modal (can close)
+        </button>
+        <button
+          type="button"
+          (click)="openBottomSheetModalClose(false)"
+          class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg"
+        >
+          Open modal (can close, no X button)
+        </button>
+        <button
+          type="button"
+          (click)="openBottomSheetModalNotClose()"
+          class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg"
+        >
+          Open modal over other
+        </button>
+        <button
+          type="button"
+          (click)="openBottomSheetModalOver()"
+          class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg"
+        >
+          Open modal after other
+        </button>
+      </div>
+      <p class="py-96">
+        Some text with a lot of padding to show scroll disabled when modal
+        opened.
+      </p>
     </section>
   `,
   styles: '',
@@ -98,21 +112,44 @@ export class BottomSheetModalPageComponent {
   );
 
   // State
-  opened: boolean = false;
+  opened = this.ngxBottomSheetModalService.currentLayer;
 
-  openBottomSheetModal() {
+  readonly closeButtonClass = 'text-cyan-400 dark:text-cyan-200';
+
+  openBottomSheetModalClose(showCloseButton = true) {
     this.ngxBottomSheetModalService.openBottomSheet({
       contentComponent: BottomSheetModalContentComponent,
       inputs: {
         title: 'My modal',
         description: 'A simple bottom sheet modal :)',
       },
-      onClose: () => {
-        this.opened = false;
-      },
-      showCloseButton: true,
-      closeButtonClass: 'text-cyan-400 dark:text-cyan-200',
+      showCloseButton: showCloseButton,
+      closeButtonClass: this.closeButtonClass,
     });
-    this.opened = true;
+  }
+
+  openBottomSheetModalNotClose() {
+    this.ngxBottomSheetModalService.openBottomSheet({
+      contentComponent: BottomSheetModalContentComponent,
+      inputs: {
+        title: 'My modal',
+        description: "A simple bottom sheet modal. Can't be dissmissed",
+        showOKButton: true,
+      },
+      canClose: false,
+      closeButtonClass: this.closeButtonClass,
+    });
+  }
+
+  openBottomSheetModalOver() {
+    this.ngxBottomSheetModalService.openBottomSheet({
+      contentComponent: BottomSheetModalContentComponent,
+      inputs: {
+        title: 'My modal',
+        description: 'A simple bottom sheet modal. You can open other.',
+        openOtherModal: true,
+      },
+      closeButtonClass: this.closeButtonClass,
+    });
   }
 }

@@ -1,31 +1,31 @@
-@if (content$ | async; as content) { @if (content.contentComponent) {
+@for (modal of modals(); track modal) { @if (modal.contentComponent) {
 <!-- container -->
-<div @container class="relative grid h-dvh grid-cols-1 grid-rows-1">
+<div @container class="absolute w-svw grid h-dvh grid-cols-1 grid-rows-1">
   <!-- shade -->
   <div
     @fade
     class="col-span-1 col-start-1 row-span-1 row-start-1 w-svw bg-black bg-opacity-60"
-    (click)="close()"
+    (click)="modal.canClose && close()"
     aria-hidden="true"
   ></div>
 
   <!-- bottom sheet -->
   <div
     @slideUp
-    class="z-10 col-span-1 col-start-1 row-span-1 row-start-1 self-end md:absolute md:bottom-0 md:left-0 md:right-0 md:top-0 md:m-auto md:rounded-xl relative max-h-screen overflow-hidden md:w-min"
+    class="col-span-1 col-start-1 row-span-1 row-start-1 self-end md:absolute md:bottom-0 md:left-0 md:right-0 md:top-0 md:m-auto md:rounded-xl relative max-h-screen overflow-hidden md:w-min"
     [class.rounded-t-none]="fullScreen"
     [class.rounded-t-xl]="!fullScreen"
     #bottomSheet
   >
     <ng-container
-      *ngComponentOutlet="content.contentComponent; inputs: content.inputs"
+      *ngComponentOutlet="modal.contentComponent ?? null; inputs: modal.inputs"
     />
-    @if (content.showCloseButton) {
+    @if (modal.showCloseButton && modal.canClose) {
     <button
       class="top-2 right-2"
       [class.fixed]="fullScreen"
       [class.absolute]="!fullScreen"
-      [class]="content.closeButtonClass ?? 'text-gray-500 dark:text-gray-300'"
+      [class]="modal.closeButtonClass ?? 'text-gray-500 dark:text-gray-300'"
       (click)="close()"
     >
       <svg
@@ -45,4 +45,4 @@
     }
   </div>
 </div>
-} }
+}}
