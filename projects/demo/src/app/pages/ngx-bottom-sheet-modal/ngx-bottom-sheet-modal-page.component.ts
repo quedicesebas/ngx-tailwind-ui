@@ -87,7 +87,7 @@ import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-conte
           (click)="openBottomSheetModalNotClose()"
           class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg"
         >
-          Open modal over other
+          Open modal (can't close)
         </button>
         <button
           type="button"

@@ -58,6 +58,9 @@ export class NgxBottomSheetModalService {
       last.onClose?.();
       // We use this instead of 'this.layers().pop()' in order to 'effects' work
       this.layers.update((value) => value.slice(0, value.length - 1));
+      if (this.layers.length == 0) {
+        this.document.body.classList.remove('overflow-hidden');
+      }
     }
   }
 
