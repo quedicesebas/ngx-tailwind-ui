@@ -46,9 +46,12 @@ export function phoneNumberValidator(
 ): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value) {
+      const cleanedNumber =
+        (control.value.trim().startsWith('+') ? '+' : '') + // Preserve '+' at the beginning
+        control.value.replace(/[^0-9]+/g, '');
       const validatedPhone =
         phoneNumberValidationService.parseWithDefaultCountry(
-          control.value,
+          cleanedNumber,
           countryCodeControl?.value,
           defaultCountryCode
         );
