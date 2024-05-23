@@ -1,6 +1,5 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Type, computed, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 const configDefaults = {
   contentComponent: null,
@@ -27,9 +26,6 @@ export interface NgxBottomSheetModalConfig {
   providedIn: 'root',
 })
 export class NgxBottomSheetModalService {
-  private readonly layersSource$ =
-    new BehaviorSubject<NgxBottomSheetModalConfig>(configDefaults);
-
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
   layers = signal<NgxBottomSheetModalConfig[]>([]);

@@ -1,6 +1,6 @@
 {
   "name": "ngx-bottom-sheet-modal",
-  "version": "2.1.0",
+  "version": "3.0.1",
   "description": "Angular 17 and TailwindCSS 3.4 Bottom Sheet Modal",
   "repository": {
     "type": "git",
@@ -19,8 +19,8 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0"
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
