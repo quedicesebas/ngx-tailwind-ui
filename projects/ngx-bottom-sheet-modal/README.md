@@ -152,7 +152,6 @@ export class BottomSheetModalPageComponent {
   openBottomSheetModal() {
     this.ngxBottomSheetModalService.openBottomSheet({
       contentComponent: ModalContentComponent,
-      inputs: data,
       inputs: {
         title: "My modal",
         description: "A simple bottom sheet modal :)",
