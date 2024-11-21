@@ -11,9 +11,8 @@ const initialValue = {
 };
 
 @Component({
-  selector: 'app-ngx-phonenumbers-page',
-  standalone: true,
-  template: `
+    selector: 'app-ngx-phonenumbers-page',
+    template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
       <ol
         class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
@@ -148,8 +147,8 @@ const initialValue = {
       </form>
     </div>
   `,
-  styles: ``,
-  imports: [CommonModule, FormsModule, NgxPhonenumbersDirective],
+    styles: ``,
+    imports: [CommonModule, FormsModule, NgxPhonenumbersDirective]
 })
 export class PhonenumbersPageComponent {
   // Services
@@ -177,10 +176,9 @@ export class PhonenumbersPageComponent {
 }
 
 @Component({
-  selector: 'app-alert-modal',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'app-alert-modal',
+    imports: [],
+    template: `
     <div
       class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-950 dark:text-white lg:w-96"
     >
@@ -192,7 +190,7 @@ export class PhonenumbersPageComponent {
       </p>
     </div>
   `,
-  styles: '',
+    styles: ''
 })
 export class InfoModal {
   // Inputs

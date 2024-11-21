@@ -2,10 +2,9 @@ import { Component, Input, inject } from '@angular/core';
 import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
 
 @Component({
-  selector: 'app-ngx-bottom-sheet-modal-content',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'app-ngx-bottom-sheet-modal-content',
+    imports: [],
+    template: `
     <div
       class="pt-4 lg:w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white"
     >
@@ -65,7 +64,7 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
       }
     </div>
   `,
-  styles: '',
+    styles: ''
 })
 export class BottomSheetModalContentComponent {
   // Services
