@@ -1,7 +1,7 @@
 {
   "name": "ngx-bottom-sheet-modal",
-  "version": "3.0.1",
-  "description": "Angular 17 and TailwindCSS 3.4 Bottom Sheet Modal",
+  "version": "4.0.1",
+  "description": "Angular 19 and TailwindCSS 3.4 Bottom Sheet Modal",
   "repository": {
     "type": "git",
     "url": "https://github.com/quedicesebas/angular-tailwind-ui.git"
@@ -10,6 +10,8 @@
   "keywords": [
     "angular",
     "angular17",
+    "angular18",
+    "angular19",
     "ui",
     "dialog",
     "modal",
@@ -19,8 +21,8 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

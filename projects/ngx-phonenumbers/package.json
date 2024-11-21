@@ -1,6 +1,6 @@
 {
   "name": "ngx-phonenumbers",
-  "version": "3.0.1",
+  "version": "4.0.1",
   "description": "Directive and service to handle phone numbers with Google libphonenumber library",
   "repository": {
     "type": "git",
@@ -18,9 +18,9 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0",
-    "@angular/forms": "^18.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
     "awesome-phonenumber": "^6.8.0"
   },
   "dependencies": {
