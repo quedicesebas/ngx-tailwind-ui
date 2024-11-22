@@ -2,7 +2,7 @@
 
 Directive validator and service to handle phone numbers with Google libphonenumber library.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
 
 ## Features
 

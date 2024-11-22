@@ -1,6 +1,6 @@
 {
   "name": "ngx-phonenumbers",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Directive and service to handle phone numbers with Google libphonenumber library",
   "repository": {
     "type": "git",
@@ -10,6 +10,8 @@
   "keywords": [
     "angular",
     "angular17",
+    "angular18",
+    "angular19",
     "ui",
     "input",
     "phonenumber",
