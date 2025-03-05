@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
 import { NgxPhonenumbersDirective } from 'ngx-phonenumbers';
@@ -11,8 +11,8 @@ const initialValue = {
 };
 
 @Component({
-    selector: 'app-ngx-phonenumbers-page',
-    template: `
+  selector: 'app-ngx-phonenumbers-page',
+  template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
       <ol
         class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
@@ -147,8 +147,8 @@ const initialValue = {
       </form>
     </div>
   `,
-    styles: ``,
-    imports: [CommonModule, FormsModule, NgxPhonenumbersDirective]
+  styles: ``,
+  imports: [CommonModule, FormsModule, NgxPhonenumbersDirective],
 })
 export class PhonenumbersPageComponent {
   // Services
@@ -176,24 +176,24 @@ export class PhonenumbersPageComponent {
 }
 
 @Component({
-    selector: 'app-alert-modal',
-    imports: [],
-    template: `
+  selector: 'app-alert-modal',
+  imports: [],
+  template: `
     <div
       class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-950 dark:text-white lg:w-96"
     >
       <div class="px-4">
-        <h1 class="font-bold text-xl">{{ title }}</h1>
+        <h1 class="font-bold text-xl">{{ title() }}</h1>
       </div>
       <p class="px-4 py-2 mt-4 bg-cyan-200 dark:bg-cyan-700">
-        ⓘ {{ description }}
+        ⓘ {{ description() }}
       </p>
     </div>
   `,
-    styles: ''
+  styles: '',
 })
 export class InfoModal {
   // Inputs
-  @Input() title!: string;
-  @Input() description!: string;
+  readonly title = input.required<string>();
+  readonly description = input.required<string>();
 }

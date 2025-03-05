@@ -1,4 +1,4 @@
-import { Directive, Input, inject } from '@angular/core';
+import { Directive, inject, input } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -26,14 +26,14 @@ export class NgxPhonenumbersDirective implements Validator {
     NgxPhonenumbersService
   );
 
-  @Input() countryCodeControl?: FormControl;
-  @Input() defaultCountryCode?: string;
+  readonly countryCodeControl = input<FormControl>();
+  readonly defaultCountryCode = input<string>();
 
   validate(control: AbstractControl): ValidationErrors | null {
     return phoneNumberValidator(
       this.phoneNumberValidationService,
-      this.countryCodeControl,
-      this.defaultCountryCode
+      this.countryCodeControl(),
+      this.defaultCountryCode()
     )(control);
   }
 }
@@ -52,7 +52,7 @@ export function phoneNumberValidator(
       const validatedPhone =
         phoneNumberValidationService.parseWithDefaultCountry(
           cleanedNumber,
-          countryCodeControl?.value,
+          countryCodeControl?.value ? countryCodeControl.value : undefined,
           defaultCountryCode
         );
       if (validatedPhone.valid) {

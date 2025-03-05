@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
 
 @Component({
@@ -9,10 +9,10 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
       class="pt-4 lg:w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white"
     >
       <div class="px-4">
-        <h1 class="font-bold text-xl">{{ title }}</h1>
-        <p>{{ description }}</p>
+        <h1 class="font-bold text-xl">{{ title() }}</h1>
+        <p>{{ description() }}</p>
       </div>
-      @if (showOKButton) {
+      @if (showOKButton()) {
       <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">
         ⓘ Tap OK button to close.
       </p>
@@ -39,11 +39,11 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
         <p class="py-24">Some text</p>
         }
       </div>
-      @if (showOKButton || openOtherModal) {
+      @if (showOKButton() || openOtherModal()) {
       <div
         class="p-4 flex gap-2 justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 w-full md:rounded-b-xl"
       >
-        @if (openOtherModal) {
+        @if (openOtherModal()) {
         <button
           type="button"
           (click)="openOther()"
@@ -51,7 +51,7 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
         >
           Open another modal
         </button>
-        } @if (showOKButton) {
+        } @if (showOKButton()) {
         <button
           type="button"
           (click)="close()"
@@ -73,10 +73,10 @@ export class BottomSheetModalContentComponent {
   );
 
   // Inputs
-  @Input() title!: string;
-  @Input() description!: string;
-  @Input() showOKButton!: boolean;
-  @Input() openOtherModal!: boolean;
+  readonly title = input.required<string>();
+  readonly description = input.required<string>();
+  readonly showOKButton = input.required<boolean>();
+  readonly openOtherModal = input.required<boolean>();
 
   // State
   expandedContent: boolean = false;

@@ -19,20 +19,12 @@ export class NgxPhonenumbersService {
     countryCode?: string,
     defaultCountryCode?: string
   ): ParsedPhoneNumber {
-    var parsedPhoneNumber = this.parse(phoneNumber, countryCode);
-    if (!parsedPhoneNumber.valid && !countryCode) {
-      var parsedPhoneNumberTemp = this.parse('+' + phoneNumber);
-      parsedPhoneNumber = parsedPhoneNumberTemp.valid
-        ? parsedPhoneNumberTemp
-        : parsedPhoneNumber;
-    }
-    if (!parsedPhoneNumber.valid && defaultCountryCode) {
-      var parsedPhoneNumberTemp = this.parse(phoneNumber, defaultCountryCode);
-      parsedPhoneNumber = parsedPhoneNumberTemp.valid
-        ? parsedPhoneNumberTemp
-        : parsedPhoneNumber;
-    }
-    return parsedPhoneNumber;
+    return this.parse(
+      phoneNumber,
+      phoneNumber.startsWith('+')
+        ? undefined
+        : countryCode ?? defaultCountryCode
+    );
   }
 
   /**
