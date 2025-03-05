@@ -1,6 +1,6 @@
 # Angular Tailwind UI
 
-Easy to use and simple components, directives and services. Using Angula 17 and TailwindCSS 3.
+Easy to use and simple components, directives and services. Using Angula 19 and TailwindCSS 3.
 
 Packages:
 
