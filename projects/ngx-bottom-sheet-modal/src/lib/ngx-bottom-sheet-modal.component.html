@@ -5,6 +5,8 @@
   <div
     @fade
     class="col-span-1 col-start-1 row-span-1 row-start-1 w-svw bg-black bg-opacity-60"
+    listenEscKey
+    (esc)="modal.canClose && close()"
     (click)="modal.canClose && close()"
     aria-hidden="true"
   ></div>

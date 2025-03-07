@@ -1,0 +1,15 @@
+{
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.addMissingImports.ts": "always"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "search.exclude": {
+    "**/dist": true
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "editor.linkedEditing": true
+}

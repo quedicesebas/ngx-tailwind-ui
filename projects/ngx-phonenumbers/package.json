@@ -1,6 +1,6 @@
 {
   "name": "ngx-phonenumbers",
-  "version": "4.0.3",
+  "version": "4.1.0",
   "description": "Directive and service to handle phone numbers with Google libphonenumber library",
   "repository": {
     "type": "git",

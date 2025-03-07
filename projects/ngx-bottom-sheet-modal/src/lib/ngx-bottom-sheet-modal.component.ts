@@ -6,7 +6,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { CommonModule } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -16,38 +16,45 @@ import {
   effect,
   inject,
 } from '@angular/core';
+import { EscapeListenerDirective } from './escape-listener.directive';
 import { NgxBottomSheetModalService } from './ngx-bottom-sheet-modal.service';
 import { SafeResizeObserver } from './safe-resize-observer';
 
 @Component({
-    selector: 'ngx-bottom-sheet-modal',
-    imports: [CommonModule],
-    host: { class: 'fixed z-40' },
-    templateUrl: './ngx-bottom-sheet-modal.component.html',
-    styles: ``,
-    animations: [
-        trigger('fade', [
-            transition(':enter', [
-                style({ opacity: 0 }),
-                animate('300ms', style({ opacity: 1 })),
-            ]),
-            transition(':leave', [animate('300ms', style({ opacity: 0 }))]),
-        ]),
-        trigger('slideUp', [
-            transition(':enter', [
-                style({ transform: 'translate(0,500px)' }),
-                animate('350ms cubic-bezier(0.17, 0.89, 0.24, 1.11)', style({ transform: 'translate(0,0)' })),
-            ]),
-            transition(':leave', [
-                animate('300ms ease-in-out', style({ transform: 'translate(0,500px)' })),
-            ]),
-        ]),
-        trigger('container', [
-            transition(':enter, :leave', [
-                query('@*', animateChild(), { optional: true }),
-            ]),
-        ]),
-    ]
+  selector: 'ngx-bottom-sheet-modal',
+  imports: [NgComponentOutlet, EscapeListenerDirective],
+  host: { class: 'fixed z-40' },
+  templateUrl: './ngx-bottom-sheet-modal.component.html',
+  styles: ``,
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [animate('300ms', style({ opacity: 0 }))]),
+    ]),
+    trigger('slideUp', [
+      transition(':enter', [
+        style({ transform: 'translate(0,500px)' }),
+        animate(
+          '350ms cubic-bezier(0.17, 0.89, 0.24, 1.11)',
+          style({ transform: 'translate(0,0)' })
+        ),
+      ]),
+      transition(':leave', [
+        animate(
+          '300ms ease-in-out',
+          style({ transform: 'translate(0,500px)' })
+        ),
+      ]),
+    ]),
+    trigger('container', [
+      transition(':enter, :leave', [
+        query('@*', animateChild(), { optional: true }),
+      ]),
+    ]),
+  ],
 })
 export class NgxBottomSheetModalComponent {
   // Services

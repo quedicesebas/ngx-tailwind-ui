@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-home-page',
-    imports: [RouterLink],
-    template: `
+  selector: 'app-home-page',
+  imports: [RouterLink],
+  template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
       <ol
         class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
@@ -51,6 +51,6 @@ import { RouterLink } from '@angular/router';
       </ul>
     </section>
   `,
-    styles: ``
+  styles: ``,
 })
 export class HomePageComponent {}

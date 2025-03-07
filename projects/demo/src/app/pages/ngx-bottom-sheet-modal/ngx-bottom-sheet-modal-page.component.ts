@@ -3,9 +3,9 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
 import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-content.component';
 
 @Component({
-    selector: 'app-ngx-bottom-sheet-modal-page',
-    imports: [],
-    template: `
+  selector: 'app-ngx-bottom-sheet-modal-page',
+  imports: [],
+  template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
       <ol
         class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse"
@@ -102,7 +102,6 @@ import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-conte
       </p>
     </section>
   `,
-    styles: ''
 })
 export class BottomSheetModalPageComponent {
   // Services
