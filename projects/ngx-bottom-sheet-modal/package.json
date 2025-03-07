@@ -1,6 +1,6 @@
 {
   "name": "ngx-bottom-sheet-modal",
-  "version": "4.1.0",
+  "version": "4.1.2",
   "description": "Angular 19 and TailwindCSS 3.4 Bottom Sheet Modal",
   "repository": {
     "type": "git",
