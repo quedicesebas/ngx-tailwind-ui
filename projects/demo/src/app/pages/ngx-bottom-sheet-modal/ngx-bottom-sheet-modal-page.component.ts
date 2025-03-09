@@ -120,6 +120,7 @@ export class BottomSheetModalPageComponent {
       inputs: {
         title: 'My modal',
         description: 'A simple bottom sheet modal :)',
+        showCloseButton: showCloseButton,
       },
       showCloseButton: showCloseButton,
       closeButtonClass: this.closeButtonClass,

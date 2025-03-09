@@ -68,7 +68,7 @@ import { NgxBottomSheetModalService } from "ngx-bottom-sheet-modal";
         <h1 class="font-bold text-xl">{{ title }}</h1>
         <p>{{ description }}</p>
       </div>
-      <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">ⓘ Tap outside or click button below to close.</p>
+      <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">ⓘ Tap outside, press Esc or click button below to close.</p>
       <div class="px-4 overflow-auto md:max-h-96">
         <p class="pt-4 font-semibold" (click)="expandedContent = !expandedContent">
           {{ expandedContent ? "Show less content [-]" : "Show  more content [+]" }}
@@ -115,7 +115,7 @@ Inject the modal service to the component from which you want to open the modal.
 | contentComponent | true     | Type<any>               |                                  | Content component class                                                                                               |
 | inputs           | false    | Record<string, unknown> |                                  | An object containing the data. Each property of it can be mapped as an input property in the content component        |
 | onClose          | false    | () => void              |                                  | Callback function to be called when the modal is closed by the user                                                   |
-| canClose         | false    | boolean                 | true                             | Allows to close (dismiss) the modal tapping in the back shade                                                         |
+| canClose         | false    | boolean                 | true                             | Allows to close (dismiss) the modal tapping in the back shade or pressing the Escape (Esc) key                        |
 | showCloseButton  | false    | boolean                 | true                             | Show a close icon button in the top-rigth corner of the bottom sheet modal. Works only if `canClose` is set to `true` |
 | closeButtonClass | false    | string                  | text-gray-500 dark:text-gray-300 | Close icon button class                                                                                               |
 

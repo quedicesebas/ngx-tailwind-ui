@@ -6,21 +6,17 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
   imports: [],
   template: `
     <div
-      class="pt-4 lg:w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white"
+      class="pt-4 md:w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white"
     >
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title() }}</h1>
         <p>{{ description() }}</p>
       </div>
-      @if (showOKButton()) {
       <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">
-        ⓘ Tap OK button to close.
+        @if (showOKButton()) { ⓘ Tap OK button to close. } @else if
+        (showCloseButton()) { ⓘ Tap outside, press Esc or click the X to close.
+        } @else { ⓘ Tap outside or press Esc to close. }
       </p>
-      } @else {
-      <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">
-        ⓘ Tap outside or the x to close.
-      </p>
-      }
       <div class="px-4 pb-4 overflow-auto md:max-h-96">
         <p
           class="pt-4 font-semibold  cursor-pointer"
@@ -73,10 +69,11 @@ export class BottomSheetModalContentComponent {
   );
 
   // Inputs
-  readonly title = input.required<string>();
-  readonly description = input.required<string>();
-  readonly showOKButton = input.required<boolean>();
-  readonly openOtherModal = input.required<boolean>();
+  readonly title = input<string>();
+  readonly description = input<string>();
+  readonly showOKButton = input<boolean>();
+  readonly showCloseButton = input(true);
+  readonly openOtherModal = input<boolean>();
 
   // State
   expandedContent: boolean = false;
@@ -92,6 +89,7 @@ export class BottomSheetModalContentComponent {
         title: 'Other modal',
         description: 'A simple bottom sheet modal over other :)',
       },
+      closeButtonClass: 'text-cyan-400 dark:text-cyan-200',
     });
   }
 }
