@@ -27,6 +27,6 @@ jobs:
       - run: npm ci
       - run: npm run build ${{ inputs.project_name }}
       - run: npm publish
-        working-directory: /home/runner/work/angular-tailwind-ui/ngx-tailwind-ui/dist/${{ inputs.project_name }}
+        working-directory: /home/runner/work/angular-tailwind-ui/angular-tailwind-ui/dist/${{ inputs.project_name }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
