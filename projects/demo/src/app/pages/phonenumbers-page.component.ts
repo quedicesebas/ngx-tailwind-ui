@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
-import { NgxPhonenumbersDirective } from 'ngx-phonenumbers';
+import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
+import { TauiPhonenumbersDirective } from 'phonenumbers';
 
 const initialValue = {
   phoneWithCountry: '',
@@ -11,7 +11,7 @@ const initialValue = {
 };
 
 @Component({
-  selector: 'app-ngx-phonenumbers-page',
+  selector: 'app-phonenumbers-page',
   template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
       <ol
@@ -55,7 +55,7 @@ const initialValue = {
             </svg>
             <span
               class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400"
-              >ngx-phonenumbers</span
+              >Phone numbers</span
             >
           </div>
         </li>
@@ -77,7 +77,7 @@ const initialValue = {
             name="phoneWithCountry"
             [(ngModel)]="demo.phoneWithCountry"
             required
-            ngxPhonenumber
+            phonenumber
             defaultCountryCode="+57"
             [countryCodeControl]="countryCode.control"
             #phoneWithCountry="ngModel"
@@ -117,7 +117,7 @@ const initialValue = {
             name="phone"
             [(ngModel)]="demo.phone"
             required
-            ngxPhonenumber
+            phonenumber
             defaultCountryCode="+57"
             type="text"
             #phone="ngModel"
@@ -148,19 +148,19 @@ const initialValue = {
     </div>
   `,
   styles: ``,
-  imports: [CommonModule, FormsModule, NgxPhonenumbersDirective],
+  imports: [CommonModule, FormsModule, TauiPhonenumbersDirective],
 })
 export class PhonenumbersPageComponent {
   // Services
-  private readonly ngxBottomSheetModalService = inject(
-    NgxBottomSheetModalService
+  private readonly bottomSheetModalService = inject(
+    TauiBottomSheetModalService
   );
 
   demo: { phoneWithCountry: string; phone: string; countryCode: string } =
     initialValue;
 
   submit() {
-    this.ngxBottomSheetModalService.openBottomSheet({
+    this.bottomSheetModalService.openBottomSheet({
       contentComponent: InfoModal,
       inputs: {
         title: 'Your phone number',

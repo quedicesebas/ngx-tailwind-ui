@@ -4,7 +4,7 @@ import { ParsedPhoneNumber, parsePhoneNumber } from 'awesome-phonenumber';
 @Injectable({
   providedIn: 'root',
 })
-export class NgxPhonenumbersService {
+export class TauiPhonenumbersService {
   constructor() {}
 
   /**

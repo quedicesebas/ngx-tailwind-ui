@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
-import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-content.component';
+import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
+import { BottomSheetModalContentComponent } from './bottom-sheet-modal-content.component';
 
 @Component({
-  selector: 'app-ngx-bottom-sheet-modal-page',
+  selector: 'app-bottom-sheet-modal-page',
   imports: [],
   template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
@@ -48,7 +48,7 @@ import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-conte
             </svg>
             <span
               class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400"
-              >ngx-bottom-sheet-modal</span
+              >Bottom sheet modal</span
             >
           </div>
         </li>
@@ -59,8 +59,8 @@ import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-conte
         Angular bottom sheet modal demo
         <span
           class="bg-red-500 text-white rounded-full px-3 py-1 text-sm"
-          [class.!bg-green-500]="opened()"
-          >{{ opened() ? 'opened' : 'closed' }}</span
+          [class.!bg-green-500]="currentLayer()"
+          >{{ currentLayer() ? 'opened' : 'closed' }}</span
         >
       </h1>
       <p class="mb-2">
@@ -105,17 +105,17 @@ import { BottomSheetModalContentComponent } from './ngx-bottom-sheet-modal-conte
 })
 export class BottomSheetModalPageComponent {
   // Services
-  private readonly ngxBottomSheetModalService = inject(
-    NgxBottomSheetModalService
+  private readonly bottomSheetModalService = inject(
+    TauiBottomSheetModalService
   );
 
   // State
-  opened = this.ngxBottomSheetModalService.currentLayer;
+  currentLayer = this.bottomSheetModalService.currentLayer;
 
   readonly closeButtonClass = 'text-cyan-400 dark:text-cyan-200';
 
   openBottomSheetModalClose(showCloseButton = true) {
-    this.ngxBottomSheetModalService.openBottomSheet({
+    this.bottomSheetModalService.openBottomSheet({
       contentComponent: BottomSheetModalContentComponent,
       inputs: {
         title: 'My modal',
@@ -128,7 +128,7 @@ export class BottomSheetModalPageComponent {
   }
 
   openBottomSheetModalNotClose() {
-    this.ngxBottomSheetModalService.openBottomSheet({
+    this.bottomSheetModalService.openBottomSheet({
       contentComponent: BottomSheetModalContentComponent,
       inputs: {
         title: 'My modal',
@@ -141,7 +141,7 @@ export class BottomSheetModalPageComponent {
   }
 
   openBottomSheetModalOver() {
-    this.ngxBottomSheetModalService.openBottomSheet({
+    this.bottomSheetModalService.openBottomSheet({
       contentComponent: BottomSheetModalContentComponent,
       inputs: {
         title: 'My modal',

@@ -1,4 +1,4 @@
-# ngx-phonenumbers
+# phonenumbers
 
 Directive validator and service to handle phone numbers with Google libphonenumber library.
 
@@ -13,31 +13,31 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Demo
 
-View the live [demo](https://stackblitz.com/edit/ngx-phonenumbers-demo)
+View the live [demo](https://stackblitz.com/edit/phonenumbers-demo)
 
 ## Installation
 
 ```shell
-npm install ngx-phonenumbers
+npm install phonenumbers
 ```
 
 ## Usage
 
 ### 1. Import the standalone directive
 
-Add the `NgxPhonenumbersDirective` to your component imports. If not imported yet, add `CommonModule` and `FormsModule`.
+Add the `TauiPhonenumbersDirective` to your component imports. If not imported yet, add `CommonModule` and `FormsModule`.
 
 ```typescript
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgxPhonenumbersDirective } from 'ngx-phonenumbers';
+import { TauiPhonenumbersDirective } from 'phonenumbers';
 
 @Component({
-  selector: 'app-ngx-phonenumbers-page',
+  selector: 'app-phonenumbers-page',
   standalone: true,
   template: ``,
   styles: ``,
-  imports: [CommonModule, FormsModule, NgxPhonenumbersDirective],
+  imports: [CommonModule, FormsModule, TauiPhonenumbersDirective],
 })
 ```
 
@@ -46,7 +46,7 @@ import { NgxPhonenumbersDirective } from 'ngx-phonenumbers';
 You can use a single input for the full phone number:
 
 ```html
-<input type="tel" placeholder="Phone number" id="phone" name="phone" [(ngModel)]="demo.phone" ngxPhonenumber defaultCountryCode="57" type="text" #phone="ngModel" />
+<input type="tel" placeholder="Phone number" id="phone" name="phone" [(ngModel)]="demo.phone" phonenumber defaultCountryCode="57" type="text" #phone="ngModel" />
 ```
 
 Or use two inputs, one for the national part of the number an other for the country code (binding it with the `countryCodeControl` input).
@@ -56,11 +56,11 @@ Or use two inputs, one for the national part of the number an other for the coun
 ```
 
 ```html
-<input type="text" placeholder="Phone number" id="phoneWithCountry" name="phoneWithCountry" [(ngModel)]="demo.phoneWithCountry" ngxPhonenumber defaultCountryCode="+57" [countryCodeControl]="countryCode.control" #phoneWithCountry="ngModel" />
+<input type="text" placeholder="Phone number" id="phoneWithCountry" name="phoneWithCountry" [(ngModel)]="demo.phoneWithCountry" phonenumber defaultCountryCode="+57" [countryCodeControl]="countryCode.control" #phoneWithCountry="ngModel" />
 ```
 
 The `defaultCountryCode` should be the 2 letter ISO code. You can include or not the '+'.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/quedicesebas/angular-tailwind-ui/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/quedicesebas/ngx-tailwind-ui/main/LICENSE) file for details.

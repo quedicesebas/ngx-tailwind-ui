@@ -1,9 +1,9 @@
 import { Directive, HostListener, output } from '@angular/core';
 
 @Directive({
-  selector: '[listenEscKey]',
+  selector: '[tauiListenEscKey]',
 })
-export class EscapeListenerDirective {
+export class TauiEscapeListenerDirective {
   esc = output();
 
   @HostListener('document:keyup', ['$event']) handleKeyEvent(

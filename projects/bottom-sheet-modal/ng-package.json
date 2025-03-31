@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ngx-phonenumbers",
+  "dest": "../../dist/bottom-sheet-modal",
   "lib": {
     "entryFile": "src/public-api.ts"
   }

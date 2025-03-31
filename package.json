@@ -1,15 +1,15 @@
 {
-  "name": "angular-tailwind-ui",
-  "version": "0.0.0",
+  "name": "ngx-tailwind-ui",
+  "version": "5.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --project=demo",
-    "build:modal": "ng build ngx-bottom-sheet-modal",
-    "watch:modal": "ng build ngx-bottom-sheet-modal --watch --configuration development",
-    "build:phone": "ng build ngx-phonenumbers",
-    "watch:phone": "ng build ngx-phonenumbers --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:demo": "node dist/demo/server/server.mjs"
+    "start": "ng serve demo",
+    "serve:ssr:demo": "node dist/demo/server/server.mjs",
+    "build:demo": "ng build demo",
+    "watch:demo": "ng build demo --watch --configuration development",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {

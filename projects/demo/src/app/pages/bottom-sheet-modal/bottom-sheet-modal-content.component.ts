@@ -1,8 +1,8 @@
 import { Component, inject, input } from '@angular/core';
-import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
+import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
 
 @Component({
-  selector: 'app-ngx-bottom-sheet-modal-content',
+  selector: 'app-bottom-sheet-modal-content',
   imports: [],
   template: `
     <div
@@ -64,8 +64,8 @@ import { NgxBottomSheetModalService } from 'ngx-bottom-sheet-modal';
 })
 export class BottomSheetModalContentComponent {
   // Services
-  private readonly ngxBottomSheetModalService = inject(
-    NgxBottomSheetModalService
+  private readonly bottomSheetModalService = inject(
+    TauiBottomSheetModalService
   );
 
   // Inputs
@@ -79,11 +79,11 @@ export class BottomSheetModalContentComponent {
   expandedContent: boolean = false;
 
   close() {
-    this.ngxBottomSheetModalService.closeBottomSheet();
+    this.bottomSheetModalService.closeBottomSheet();
   }
 
   openOther() {
-    this.ngxBottomSheetModalService.openBottomSheet({
+    this.bottomSheetModalService.openBottomSheet({
       contentComponent: BottomSheetModalContentComponent,
       inputs: {
         title: 'Other modal',

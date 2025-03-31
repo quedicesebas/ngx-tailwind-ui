@@ -1,14 +1,14 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Type, computed, signal } from '@angular/core';
 
-const configDefaults = {
+const configDefaults: TauiBottomSheetModalConfig = {
   contentComponent: null,
   canClose: true,
   showCloseButton: true,
   closeButtonClass: 'text-gray-500 dark:text-gray-300',
 };
 
-export interface NgxBottomSheetModalConfig {
+export interface TauiBottomSheetModalConfig {
   /** Content component class */
   contentComponent: Type<any> | null;
   /** An object containing the data. Each property of it can be mapped as an input property in the content component */
@@ -25,44 +25,40 @@ export interface NgxBottomSheetModalConfig {
 @Injectable({
   providedIn: 'root',
 })
-export class NgxBottomSheetModalService {
+export class TauiBottomSheetModalService {
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  layers = signal<NgxBottomSheetModalConfig[]>([]);
-  currentLayer = computed(() => this.getLast());
+  layers = signal<TauiBottomSheetModalConfig[]>([]);
+  currentLayer = computed(() =>
+    this.layers().length > 0
+      ? this.layers()[this.layers().length - 1]
+      : undefined
+  );
 
   /**
    * Opens the modal with the given parameters
-   * @param config NgxBottomSheetModalConfig
+   * @param config BottomSheetModalConfig
    */
-  openBottomSheet(config: NgxBottomSheetModalConfig): void {
+  openBottomSheet(config: TauiBottomSheetModalConfig): void {
     this.document.body.classList.add('overflow-hidden');
     const next = {
       ...configDefaults,
       ...config,
     };
-    // We use this instead of 'this.layers().push(next)' in order to 'effects' work
-    this.layers.update((value) => [...value, next]);
+    this.layers.update((current) => [...current, next]);
   }
 
   /**
    * Closes the modal with the given parameters
    */
   closeBottomSheet(): void {
-    const last = this.getLast();
+    const last = this.currentLayer();
     if (last) {
       last.onClose?.();
-      // We use this instead of 'this.layers().pop()' in order to 'effects' work
-      this.layers.update((value) => value.slice(0, value.length - 1));
+      this.layers.update((current) => current.slice(0, current.length - 1));
       if (this.layers.length == 0) {
         this.document.body.classList.remove('overflow-hidden');
       }
     }
-  }
-
-  private getLast() {
-    return this.layers().length > 0
-      ? this.layers()[this.layers().length - 1]
-      : undefined;
   }
 }

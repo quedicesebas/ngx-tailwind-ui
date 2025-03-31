@@ -7,23 +7,23 @@ import {
   Validator,
   ValidatorFn,
 } from '@angular/forms';
-import { NgxPhonenumbersService } from './ngx-phonenumbers.service';
+import { TauiPhonenumbersService } from './phonenumbers.service';
 
 @Directive({
-  selector: '[ngxPhonenumber]',
+  selector: '[phonenumber]',
   standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
-      useExisting: NgxPhonenumbersDirective,
+      useExisting: TauiPhonenumbersDirective,
       multi: true,
     },
   ],
 })
-export class NgxPhonenumbersDirective implements Validator {
+export class TauiPhonenumbersDirective implements Validator {
   // Services
   private readonly phoneNumberValidationService = inject(
-    NgxPhonenumbersService
+    TauiPhonenumbersService
   );
 
   readonly countryCodeControl = input<FormControl>();
@@ -40,7 +40,7 @@ export class NgxPhonenumbersDirective implements Validator {
 
 /** A phone number must be a valid one */
 export function phoneNumberValidator(
-  phoneNumberValidationService: NgxPhonenumbersService,
+  phoneNumberValidationService: TauiPhonenumbersService,
   countryCodeControl?: FormControl,
   defaultCountryCode?: string
 ): ValidatorFn {

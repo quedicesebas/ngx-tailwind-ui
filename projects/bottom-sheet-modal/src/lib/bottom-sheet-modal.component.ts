@@ -16,15 +16,15 @@ import {
   effect,
   inject,
 } from '@angular/core';
-import { EscapeListenerDirective } from './escape-listener.directive';
-import { NgxBottomSheetModalService } from './ngx-bottom-sheet-modal.service';
+import { TauiBottomSheetModalService } from './bottom-sheet-modal.service';
+import { TauiEscapeListenerDirective } from './escape-listener.directive';
 import { SafeResizeObserver } from './safe-resize-observer';
 
 @Component({
-  selector: 'ngx-bottom-sheet-modal',
-  imports: [NgComponentOutlet, EscapeListenerDirective],
+  selector: 'taui-bottom-sheet-modal',
+  imports: [NgComponentOutlet, TauiEscapeListenerDirective],
   host: { class: 'fixed z-40' },
-  templateUrl: './ngx-bottom-sheet-modal.component.html',
+  templateUrl: './bottom-sheet-modal.component.html',
   styles: ``,
   animations: [
     trigger('fade', [
@@ -56,9 +56,9 @@ import { SafeResizeObserver } from './safe-resize-observer';
     ]),
   ],
 })
-export class NgxBottomSheetModalComponent {
+export class TauiBottomSheetModalComponent {
   // Services
-  protected readonly layersService = inject(NgxBottomSheetModalService);
+  protected readonly layersService = inject(TauiBottomSheetModalService);
 
   @ViewChildren('bottomSheet') bottomSheets!: QueryList<ElementRef>;
   observer!: ResizeObserver;

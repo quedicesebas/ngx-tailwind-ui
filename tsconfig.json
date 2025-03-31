@@ -10,11 +10,14 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "ngx-phonenumbers": [
-        "./dist/ngx-phonenumbers"
+      "phonenumbers": [
+        "./dist/phonenumbers"
       ],
-      "ngx-bottom-sheet-modal": [
-        "./dist/ngx-bottom-sheet-modal"
+      "bottom-sheet-modal": [
+        "./dist/bottom-sheet-modal"
+      ],
+      "toast": [
+        "./dist/toast"
       ]
     },
     "skipLibCheck": true,

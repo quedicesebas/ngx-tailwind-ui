@@ -43,10 +43,26 @@ import { RouterLink } from '@angular/router';
         class="list-inside list-image-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxNCAxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSIjMzhiZGY4Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMy42ODUuMTUzYS43NTIuNzUyIDAgMCAxIC4xNDMgMS4wNTJsLTggMTAuNWEuNzUuNzUgMCAwIDEtMS4xMjcuMDc1bC00LjUtNC41YS43NS43NSAwIDAgMSAxLjA2LTEuMDZsMy44OTQgMy44OTMgNy40OC05LjgxN2EuNzUuNzUgMCAwIDEgMS4wNS0uMTQzWiIgLz48L3N2Zz4=')]"
       >
         <li class="py-2 px-4">
-          <a routerLink="/ngx-bottom-sheeet-modal">ngx-bottom-sheet-modal</a>
+          <a routerLink="/bottom-sheeet-modal"
+            >Bottom sheet modal
+            <small class="opacity-75"
+              >&#64;ngx-tailwind-ui/bottom-sheet-modal</small
+            ></a
+          >
         </li>
         <li class="py-2 px-4">
-          <a routerLink="/ngx-phonenumbers">ngx-phonenumbers</a>
+          <a routerLink="/toast"
+            >Toast
+            <small class="opacity-75">&#64;ngx-tailwind-ui/toast</small></a
+          >
+        </li>
+        <li class="py-2 px-4">
+          <a routerLink="/phonenumbers"
+            >Prone numbers
+            <small class="opacity-75"
+              >&#64;ngx-tailwind-ui/phonenumbers</small
+            ></a
+          >
         </li>
       </ul>
     </section>
