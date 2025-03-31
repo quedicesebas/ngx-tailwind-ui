@@ -1,6 +1,12 @@
 {
   "name": "ngx-tailwind-ui",
   "version": "5.0.0",
+  "workspaces": [
+    "projects/bottom-sheet-modal",
+    "projects/toast",
+    "projects/phonenumbers"
+  ],
+  "description": "Tailwind CSS UI components for Angular",
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
@@ -9,7 +15,8 @@
     "watch:demo": "ng build demo --watch --configuration development",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "release": "npm version --no-git-tag-version --workspaces=true"
   },
   "private": true,
   "dependencies": {

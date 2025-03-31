@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
@@ -148,7 +147,7 @@ const initialValue = {
     </div>
   `,
   styles: ``,
-  imports: [CommonModule, FormsModule, TauiPhonenumbersDirective],
+  imports: [FormsModule, TauiPhonenumbersDirective],
 })
 export class PhonenumbersPageComponent {
   // Services

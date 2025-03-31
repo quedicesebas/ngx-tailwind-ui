@@ -1,4 +1,4 @@
-# phonenumbers
+# Angular Tailwind UI - Phone numbers
 
 Directive validator and service to handle phone numbers with Google libphonenumber library.
 
@@ -18,26 +18,25 @@ View the live [demo](https://stackblitz.com/edit/phonenumbers-demo)
 ## Installation
 
 ```shell
-npm install phonenumbers
+npm install @ngx-tailwind-ui/phonenumbers
 ```
 
 ## Usage
 
 ### 1. Import the standalone directive
 
-Add the `TauiPhonenumbersDirective` to your component imports. If not imported yet, add `CommonModule` and `FormsModule`.
+Add the `TauiPhonenumbersDirective` to your component imports. If not imported yet, add `FormsModule`.
 
 ```typescript
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TauiPhonenumbersDirective } from 'phonenumbers';
+import { TauiPhonenumbersDirective } from '@ngx-tailwind-ui/phonenumbers';
 
 @Component({
   selector: 'app-phonenumbers-page',
   standalone: true,
   template: ``,
   styles: ``,
-  imports: [CommonModule, FormsModule, TauiPhonenumbersDirective],
+  imports: [FormsModule, TauiPhonenumbersDirective],
 })
 ```
 

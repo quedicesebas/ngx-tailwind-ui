@@ -1,4 +1,4 @@
-# Bottom sheet modal
+# Angular Tailwind UI - Bottom sheet modal
 
 Simple bottom sheet modal for Angular, using Tailwind CSS.
 
@@ -25,7 +25,7 @@ View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui)
 ## Installation
 
 ```shell
-npm install bottom-sheet-modal
+npm install @ngx-tailwind-ui/bottom-sheet-modal
 ```
 
 ## Usage
@@ -35,14 +35,14 @@ npm install bottom-sheet-modal
 ```typescript
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TauiBottomSheetModalComponent } from 'bottom-sheet-modal';
+import { TauiBottomSheetModalComponent } from '@ngx-tailwind-ui/bottom-sheet-modal';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   template: `
-  <router-outlet></router-outlet>
-  <bottom-sheet-modal></bottom-sheet-modal>
+    <router-outlet></router-outlet>
+    <taui-bottom-sheet-modal />
   `,
   styleUrl: './app.component.scss',
   imports: [RouterOutlet, TauiBottomSheetModalComponent],
@@ -56,7 +56,7 @@ export class AppComponent {
 
 ```typescript
 import { Component, Input, inject } from "@angular/core";
-import { TauiBottomSheetModalService } from "bottom-sheet-modal";
+import { TauiBottomSheetModalService } from "@ngx-tailwind-ui/bottom-sheet-modal";
 
 @Component({
   selector: "app-modal-content-component",
@@ -121,7 +121,7 @@ Inject the modal service to the component from which you want to open the modal.
 
 ```typescript
 import { Component, inject } from "@angular/core";
-import { TauiBottomSheetModalService } from "bottom-sheet-modal";
+import { TauiBottomSheetModalService } from "@ngx-tailwind-ui/bottom-sheet-modal";
 import { ModalContentComponent } from "./modal-content-component.component";
 
 @Component({

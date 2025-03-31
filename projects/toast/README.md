@@ -1,64 +1,131 @@
-# NgxToastIt
+# Angular Tailwind UI - Toast
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Simple toast component, using Tailwind CSS.
 
-## Code scaffolding
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Features
 
-```bash
-ng generate component component-name
+- Show toast painless and clearer.
+- Different types (information, success, warining and error)
+- Dissmisable, duration configurable and with visual feedback
+
+## Demo
+
+View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui)
+
+## Prerrequisites
+
+- Tailwind CSS. Check [Angular installation](https://tailwindcss.com/docs/guides/angular)
+
+## Installation
+
+```shell
+npm install @ngx-tailwind-ui/toast
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Usage
 
-```bash
-ng generate --help
+### 1. Add the toast wrapper to your app root. Import it into your component definition and add it to the end of the template:
+
+```typescript
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { TauiToastComponent } from '@ngx-tailwind-ui/toast';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: `
+    <router-outlet></router-outlet>
+    <taui-toast />
+  `,
+  styleUrl: './app.component.scss',
+  imports: [RouterOutlet, TauiToastComponent],
+})
+export class AppComponent {
+  }
+}
 ```
 
-## Building
+### 2. Show toast
 
-To build the library, run:
+Inject the toast service to the component from which you want to show the toast. Now you can call `showToast` method any time you want to open the bottom sheet modal, using the `TauiToastConfig` object.
 
-```bash
-ng build toast
+#### TauiToastConfig
+
+| Name            | Required | Type    | Default | Description                                               |
+| --------------- | -------- | ------- | ------- | --------------------------------------------------------- |
+| message         | true     | string  |         | Message to be shown in the toast                          |
+| duration        | false    | number  | 3000    | Duration of the toast in milliseconds                     |
+| type            | false    | 'info'  |         | Type of the toast                                         |
+| showCloseButton | false    | boolean | true    | Show a close icon button in the rigth corner of the toast |
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { TauiToastConfig, TauiToastService } from "toast";
+
+@Component({
+  selector: "app-component",
+  standalone: true,
+  template: `
+    <section class="dark:text-slate-300">
+      <h1 class="font-bold text-xl mt-4 mb-4">
+        Angular toast demo
+        <span class="bg-red-500 text-white rounded-full px-3 py-1 text-sm" [class.!bg-green-500]="toastStack().length > 0">showing {{ toastStack().length }}</span>
+      </h1>
+      <p class="mb-2">Simple toast for Angular, using Tailwind CSS.</p>
+      <button type="button" (click)="showToast()" class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg">Show a toast</button>
+    </section>
+  `,
+  styles: ``,
+  imports: [],
+})
+export class BottomSheetModalPageComponent {
+  // Services
+  private toastService = inject(TauiToastService);
+
+  toastStack = this.toastService.toastStack.asReadonly();
+
+  showToast() {
+    const type = "success";
+    this.toastService.showToast({
+      type: type,
+      message: `This is a ${type} message in a toast`,
+    });
+  }
+}
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+As you can see, you can pass any data to the modal component using the `inputs` parameter of the `openBottomSheet` method. The data will be available in the modal component as `@Input` properties.
 
-### Publishing the Library
+### 4. Provide animations
 
-Once the project is built, you can publish your library by following these steps:
+Add `provideAnimations()` to your providers in the `app.congif.ts` file:
 
-1. Navigate to the `dist` directory:
+```typescript
+import { provideAnimations } from "@angular/platform-browser/animations";
 
-   ```bash
-   cd dist/toast
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+export const appConfig: ApplicationConfig = {
+  providers: [...provideAnimations()],
+};
 ```
 
-## Running end-to-end tests
+### 5. Update Tailswind CSS config
 
-For end-to-end (e2e) testing, run:
+Include the `toast` styles. Add the following to the `content` section in your `tailwind.config.js` file:
 
-```bash
-ng e2e
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{html,ts}", "./node_modules/@ngx-tailwind-ui/toast/**/*.{html,ts,js,mjs}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📄 License
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is licensed under the MIT License - see the [LICENSE](https://raw.githubusercontent.com/quedicesebas/ngx-tailwind-ui/main/LICENSE) file for details.

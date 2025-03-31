@@ -1,12 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { TauiToastConfig, TauiToastService } from 'toast';
-
-const initialValue = {
-  phoneWithCountry: '',
-  countryCode: '',
-  phone: '',
-};
 
 @Component({
   selector: 'app-toast-page',
@@ -104,7 +97,7 @@ const initialValue = {
     </section>
   `,
   styles: ``,
-  imports: [CommonModule],
+  imports: [],
 })
 export class ToastPageComponent {
   // Services

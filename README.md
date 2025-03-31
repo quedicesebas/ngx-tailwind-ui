@@ -1,18 +1,23 @@
-# Tailwind Angular UI
+# Angular Tailwind UI
 
 Easy to use and simple components, directives and services. Using Angula 19 and TailwindCSS 3.
 
 Packages:
 
 - [bottom-sheet-modal](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/bottom-sheet-modal/README.md)
+- [toast](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/toast/README.md)
 - [phonenumbers](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/phonenumbers/README.md)
 
-## bottom-sheet-modal
+## Demo
+
+View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui)
+
+## Bottom sheet modal
 
 Simple and responsive bottom sheet modal.
 
 ```shell
-npm install bottom-sheet-modal
+npm install @ngx-tailwind-ui/bottom-sheet-modal
 ```
 
 - Create clear and reusable modal components.
@@ -24,12 +29,26 @@ npm install bottom-sheet-modal
 
 Go to [bottom-sheet-modal documentation](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/bottom-sheet-modal/README.md)
 
-## phonenumbers
+## Toast
+
+Simple toast component.
+
+```shell
+npm install @ngx-tailwind-ui/toast
+```
+
+- Show toast painless and clearer.
+- Different types (information, success, warining and error)
+- Dissmisable, duration configurable and with visual feedback
+
+Go to [toast documentation](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/toast/README.md)
+
+## Phonenumbers
 
 Directive validator and service to handle phone numbers with Google libphonenumber library.
 
 ```shell
-npm install phonenumbers
+npm install @ngx-tailwind-ui/phonenumbers
 ```
 
 - Parse and format phone numbers with Google libphonenumber library

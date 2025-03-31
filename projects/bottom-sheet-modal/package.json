@@ -1,6 +1,6 @@
 {
   "name": "@ngx-tailwind-ui/bottom-sheet-modal",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Angular 19 and TailwindCSS 3.4 Bottom Sheet Modal",
   "repository": {
     "type": "git",
@@ -31,10 +31,5 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false,
-  "devDependencies": {
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.3"
-  }
+  "sideEffects": false
 }
