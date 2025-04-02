@@ -3,6 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { TauiBottomSheetModalComponent } from 'bottom-sheet-modal';
 import { TauiToastComponent } from 'toast';
 
+/**
+ * Root component of the demo application.
+ * Provides the main layout and includes the bottom sheet modal and toast components.
+ */
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, TauiBottomSheetModalComponent, TauiToastComponent],
@@ -14,6 +18,4 @@ import { TauiToastComponent } from 'toast';
     <taui-toast />
   `,
 })
-export class AppComponent {
-  title = 'demo';
-}
+export class AppComponent {}

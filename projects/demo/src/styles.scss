@@ -1,9 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles for the demo application.
+ * This file imports Tailwind CSS and defines custom styles for the application.
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* width */
+/* Custom scrollbar width - thinner on mobile, wider on desktop */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -12,6 +14,11 @@
   ::-webkit-scrollbar {
     width: 10px;
   }
+}
+
+/* Scrollbar track styling */
+::-webkit-scrollbar-track {
+  background: theme("colors.gray.100");
 }
 
 /* Track */

@@ -8,7 +8,7 @@ export class TauiPhonenumbersService {
   constructor() {}
 
   /**
-   * Tries to parse the provided phone number as received with an optional constry code (ignored if phone number starts witn a '+'). If that fails, tries to parse it adding a '+' at the begining. If not, tries to parse it with the default country code. If everything fails, returns the original phone number parse result.
+   * Tries to parse the provided phone number as received with an optional country code (ignored if phone number starts with a '+'). If that fails, tries to parse it by adding a '+' at the beginning. If that fails, tries to parse it with the default country code. If everything fails, returns the original phone number parse result.
    * @param phoneNumber
    * @param countryCode
    * @param defaultCountryCode
@@ -28,7 +28,7 @@ export class TauiPhonenumbersService {
   }
 
   /**
-   * Parses a phone number using the awesome-phonenumber library (a JavaScript wrapper for Google libphonenumber). Ignores the country code when the phone number starts with a +.
+   * Parses a phone number using the awesome-phonenumber library (a JavaScript wrapper for Google libphonenumber). Ignores the country code when the phone number starts with a '+'.
    * @param phoneNumber
    * @param countryCode
    * @returns ParsedPhoneNumber

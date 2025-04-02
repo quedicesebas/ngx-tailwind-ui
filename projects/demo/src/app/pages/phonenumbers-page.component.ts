@@ -1,14 +1,20 @@
+import { NgIf } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
 import { TauiPhonenumbersDirective } from 'phonenumbers';
 
+/** Initial form values for the phone number demo */
 const initialValue = {
   phoneWithCountry: '',
   countryCode: '',
   phone: '',
 };
 
+/**
+ * Demo page component for the phone numbers functionality.
+ * Demonstrates phone number validation and formatting using the phonenumbers directive.
+ */
 @Component({
   selector: 'app-phonenumbers-page',
   template: `
@@ -69,7 +75,7 @@ const initialValue = {
           class="relative h-14 border-2 border-cyan-500 dark:border-cyan-700 rounded-full overflow-hidden my-2"
         >
           <input
-            type="text"
+            type="tel"
             placeholder="Phone number"
             class="px-6 pl-20 w-full text-xl font-medium h-full rounded-full bg-white dark:bg-transparent dark:text-slate-200 placeholder-cyan-700"
             id="phoneWithCountry"
@@ -118,7 +124,6 @@ const initialValue = {
             required
             phonenumber
             defaultCountryCode="+57"
-            type="text"
             #phone="ngModel"
           />
         </div>
@@ -147,17 +152,22 @@ const initialValue = {
     </div>
   `,
   styles: ``,
-  imports: [FormsModule, TauiPhonenumbersDirective],
+  imports: [FormsModule, NgIf, TauiPhonenumbersDirective],
 })
 export class PhonenumbersPageComponent {
-  // Services
+  /** Injected bottom sheet modal service for showing results */
   private readonly bottomSheetModalService = inject(
     TauiBottomSheetModalService
   );
 
+  /** Form data for the phone number inputs */
   demo: { phoneWithCountry: string; phone: string; countryCode: string } =
     initialValue;
 
+  /**
+   * Handles form submission by showing the entered phone numbers in a bottom sheet modal.
+   * Resets the form after the modal is closed.
+   */
   submit() {
     this.bottomSheetModalService.openBottomSheet({
       contentComponent: InfoModal,
@@ -174,12 +184,15 @@ export class PhonenumbersPageComponent {
   }
 }
 
+/**
+ * Modal component for displaying the submitted phone numbers.
+ */
 @Component({
-  selector: 'app-alert-modal',
+  selector: 'app-info-modal',
   imports: [],
   template: `
     <div
-      class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-950 dark:text-white lg:w-96"
+      class="pt-4 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-950 dark:text-white md:w-96"
     >
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title() }}</h1>
@@ -192,7 +205,8 @@ export class PhonenumbersPageComponent {
   styles: '',
 })
 export class InfoModal {
-  // Inputs
+  /** Title of the modal */
   readonly title = input.required<string>();
+  /** Description text to display in the modal */
   readonly description = input.required<string>();
 }

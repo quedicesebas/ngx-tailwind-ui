@@ -68,7 +68,8 @@ export class TauiBottomSheetModalComponent {
   modals = this.layersService.layers.asReadonly();
 
   constructor(private el: ElementRef, private zone: NgZone) {
-    // Listen to resize event to check if bottom sheet is full screen and set the fullScreen property. In mobile, fullScreen=true removes round borders of the botton sheet and set the close icon button position to fixed.
+    // Listen to resize event to check if bottom sheet is full screen and set the fullScreen property.
+    // In mobile, fullScreen=true removes round borders of the bottom sheet and sets the close icon button position to fixed.
     this.observer = new SafeResizeObserver((entries: any) => {
       this.zone.run(() => {
         if (
@@ -100,7 +101,7 @@ export class TauiBottomSheetModalComponent {
       }
     });
 
-    // Sets container required clasess for bottom sheet modal positioning
+    // Set container required classes for bottom sheet modal positioning
     this.el.nativeElement.parentNode.classList.add('grid');
     this.el.nativeElement.parentNode.classList.add('grid-cols-1');
     this.el.nativeElement.parentNode.classList.add('grid-rows-1');

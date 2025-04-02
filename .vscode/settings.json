@@ -11,5 +11,8 @@
     "**/dist": true
   },
   "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "editor.linkedEditing": true
+  "editor.linkedEditing": true,
+  "conventionalCommits.scopes": [
+    "bottom-sheet-modal"
+  ]
 }

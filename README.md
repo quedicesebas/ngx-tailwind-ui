@@ -1,60 +1,129 @@
 # Angular Tailwind UI
 
-Easy to use and simple components, directives and services. Using Angula 19 and TailwindCSS 3.
+A collection of easy-to-use Angular components, directives, and services built with Angular 19 and TailwindCSS 3. This library provides a set of modern, accessible, and customizable UI components that follow best practices and integrate seamlessly with your Angular applications.
 
-Packages:
+## ✨ Features
 
-- [bottom-sheet-modal](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/bottom-sheet-modal/README.md)
-- [toast](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/toast/README.md)
-- [phonenumbers](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/phonenumbers/README.md)
+- 🎨 **Modern Design**: Built with TailwindCSS 3 for beautiful, responsive components
+- 🚀 **Angular 19 Ready**: Fully compatible with the latest Angular version
+- ♿ **Accessibility First**: All components follow WCAG guidelines
+- 🌙 **Dark Mode Support**: Built-in dark mode support for all components
+- 📱 **Responsive**: Mobile-first approach with desktop optimizations
+- 🎯 **Type-Safe**: Full TypeScript support with comprehensive type definitions
+- 🔧 **Customizable**: Easy to customize with TailwindCSS classes
+- ⚡ **Performance**: Optimized for fast loading and smooth interactions
+- 📦 **Modular**: Install only what you need
+- 🛠️ **Developer Experience**: Built with developer productivity in mind
 
-## Demo
+## 📦 Packages
 
-View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui)
+### [Bottom Sheet Modal](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/bottom-sheet-modal/README.md)
 
-## Bottom sheet modal
+A responsive bottom sheet modal that adapts to screen size:
 
-Simple and responsive bottom sheet modal.
+- 📱 Displays as bottom sheet on mobile
+- 💻 Shows as modal dialog on desktop
+- 🔄 Smooth animations and transitions
+- 🎨 Customizable styling with TailwindCSS
 
-```shell
+```bash
 npm install @ngx-tailwind-ui/bottom-sheet-modal
 ```
 
-- Create clear and reusable modal components.
-- It creating managing modals painless and clearer.
-- Pass data to the modal and and implement any content you want
-- Responsive: displayed as bottom sheet on mobile and as modal dialog in desktop
+![Bottom Sheet Modal Demo](https://raw.githubusercontent.com/quedicesebas/ngx-tailwind-ui/main/projects/bottom-sheet-modal/demo.gif)
 
-![Demo animation](https://raw.githubusercontent.com/quedicesebas/ngx-tailwind-ui/main/projects/bottom-sheet-modal/demo.gif)
+### [Toast](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/toast/README.md)
 
-Go to [bottom-sheet-modal documentation](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/bottom-sheet-modal/README.md)
+A flexible toast notification system:
 
-## Toast
+- 📝 Multiple types (info, success, warning, error)
+- ⏱️ Configurable duration
+- 🎨 Visual feedback with icons
+- 🔄 Progress bar support
+- 🎯 Dismissible notifications
 
-Simple toast component.
-
-```shell
+```bash
 npm install @ngx-tailwind-ui/toast
 ```
 
-- Show toast painless and clearer.
-- Different types (information, success, warining and error)
-- Dissmisable, duration configurable and with visual feedback
+### [Phone Numbers](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/phonenumbers/README.md)
 
-Go to [toast documentation](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/toast/README.md)
+A comprehensive phone number handling solution:
 
-## Phonenumbers
+- 🔍 Validation using Google's libphonenumber
+- 🌍 Automatic country code detection
+- 📱 Formatting to international/national format
+- 🔄 Two-way binding support
+- ♿ Accessibility features
 
-Directive validator and service to handle phone numbers with Google libphonenumber library.
-
-```shell
+```bash
 npm install @ngx-tailwind-ui/phonenumbers
 ```
 
-- Parse and format phone numbers with Google libphonenumber library
-- When the phone number is valid, replace it with the formatted international number or country code plus national number. When invalid, set the 'phoneNumber' error.
+## 🎮 Demo
 
-Go to [phonenumbers documentation](https://github.com/quedicesebas/ngx-tailwind-ui/blob/main/projects/phonenumbers/README.md)
+View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see all components in action.
+
+## 🛠️ Prerequisites
+
+- Angular 17+ project
+- TailwindCSS 3
+- And package specific ones
+
+## 🚀 Quick Start
+
+1. Install the package(s) you need:
+
+```bash
+npm install @ngx-tailwind-ui/bottom-sheet-modal @ngx-tailwind-ui/toast @ngx-tailwind-ui/phonenumbers
+```
+
+2. Import the components in your Angular application:
+
+```typescript
+import { TauiBottomSheetModalComponent } from "@ngx-tailwind-ui/bottom-sheet-modal";
+import { TauiToastComponent } from "@ngx-tailwind-ui/toast";
+import { TauiPhonenumbersDirective } from "@ngx-tailwind-ui/phonenumbers";
+```
+
+3. Add TailwindCSS to your project if not already installed:
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+```
+
+4. Configure your `tailwind.config.js`:
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./src/**/*.{html,ts}", "./node_modules/@ngx-tailwind-ui/**/*.{html,ts,js,mjs}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+## 🌐 Browser Support
+
+All components are tested and supported on:
+
+- Chrome (latest)
+- Safari (latest)
+- Edge (latest)
+
+## ⚡ Performance Considerations
+
+- **Change Detection**: Optimized to minimize change detection cycles
+- **Lazy Loading**: Supports lazy loading for better initial load performance
+- **Bundle Size**: Minimal impact on bundle size
+- **Memory Usage**: Efficient memory management
+
+## 🤝 Contributing
+
+We welcome contributions!
 
 ## 📄 License
 

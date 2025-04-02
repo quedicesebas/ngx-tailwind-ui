@@ -10,6 +10,10 @@ import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { TauiToast, TauiToastService } from './toast.service';
 
+/**
+ * Toast component that displays notifications with different types (info, success, warning, error).
+ * Each toast has a progress bar, close button, and appropriate icon based on its type.
+ */
 @Component({
   selector: 'taui-toast',
   imports: [NgClass],
@@ -50,7 +54,7 @@ import { TauiToast, TauiToastService } from './toast.service';
                   d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
                 />
               </svg>
-              <span class="sr-only">Check icon</span>
+              <span class="sr-only">Success icon</span>
               } @else if (toast.config.type === 'warning') {
               <svg
                 class="w-5 h-5"
@@ -63,7 +67,7 @@ import { TauiToast, TauiToastService } from './toast.service';
                   d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"
                 />
               </svg>
-              <span class="sr-only">Exclamation icon</span>
+              <span class="sr-only">Warning icon</span>
               } @else if (toast.config.type === 'error') {
               <svg
                 class="w-5 h-5"
@@ -76,7 +80,7 @@ import { TauiToast, TauiToastService } from './toast.service';
                   d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"
                 />
               </svg>
-              <span class="sr-only">Close icon</span>
+              <span class="sr-only">Error icon</span>
               } @else {
               <svg
                 class=" w-5 h-5"
@@ -97,9 +101,9 @@ import { TauiToast, TauiToastService } from './toast.service';
               type="button"
               class="rounded-lg focus:ring-2 focus:ring-gray-300 inline-flex items-center justify-center h-8 w-8 dark:text-white dark:hover:text-white hover:opacity-75 shrink-0"
               (click)="close(toast)"
-              aria-label="Close"
+              aria-label="Close toast"
             >
-              <span class="sr-only">Close</span>
+              <span class="sr-only">Close toast</span>
               <svg
                 class="w-3 h-3"
                 aria-hidden="true"
@@ -174,6 +178,10 @@ export class TauiToastComponent {
 
   toastStack = this.toastService.toastStack.asReadonly();
 
+  /**
+   * Closes the specified toast
+   * @param toast The toast to be closed
+   */
   close(toast: TauiToast): void {
     this.toastService.closeToast(toast);
   }

@@ -1,6 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { TauiToastConfig, TauiToastService } from 'toast';
 
+/**
+ * Demo page component for the toast functionality.
+ * Demonstrates different types of toasts (info, success, warning, error) and their usage.
+ */
 @Component({
   selector: 'app-toast-page',
   template: `
@@ -100,11 +104,16 @@ import { TauiToastConfig, TauiToastService } from 'toast';
   imports: [],
 })
 export class ToastPageComponent {
-  // Services
+  /** Injected toast service for managing toast notifications */
   private toastService = inject(TauiToastService);
 
+  /** Read-only access to the current stack of active toasts */
   toastStack = this.toastService.toastStack.asReadonly();
 
+  /**
+   * Shows a toast notification with the specified type.
+   * @param type The type of toast to display (info, success, warning, or error)
+   */
   showToast(type: TauiToastConfig['type']) {
     this.toastService.showToast({
       type: type,

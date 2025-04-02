@@ -11,17 +11,18 @@ const configDefaults: TauiBottomSheetModalConfig = {
 export interface TauiBottomSheetModalConfig {
   /** Content component class */
   contentComponent: Type<any> | null;
-  /** An object containing the data. Each property of it can be mapped as an input property in the content component */
+  /** An object containing the data. Each property can be mapped as an input property in the content component */
   inputs?: Record<string, unknown>;
   /** Callback function to be called when the modal is closed by the user */
   onClose?: () => void;
-  /** Enable closing the modal, and shows de close button. Default: true */
+  /** Enable closing the modal and show the close button. Default: true */
   canClose?: boolean;
-  /** Show a close icon button in the top-rigth corner of the bottom sheet modal. Default: true */
+  /** Show a close icon button in the top-right corner of the bottom sheet modal. Default: true */
   showCloseButton?: boolean;
   /** Close icon button class. Default: 'text-gray-500 dark:text-gray-300' */
   closeButtonClass?: string;
 }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -36,8 +37,8 @@ export class TauiBottomSheetModalService {
   );
 
   /**
-   * Opens the modal with the given parameters
-   * @param config BottomSheetModalConfig
+   * Opens the modal with the given configuration
+   * @param config Configuration for the modal to be displayed
    */
   openBottomSheet(config: TauiBottomSheetModalConfig): void {
     this.document.body.classList.add('overflow-hidden');
@@ -49,7 +50,7 @@ export class TauiBottomSheetModalService {
   }
 
   /**
-   * Closes the modal with the given parameters
+   * Closes the current modal in the top layer and triggers the onClose callback if defined
    */
   closeBottomSheet(): void {
     const last = this.currentLayer();

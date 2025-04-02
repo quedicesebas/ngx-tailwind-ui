@@ -1,176 +1,39 @@
-# Angular Tailwind UI - Bottom sheet modal
+# 🪟 @ngx-tailwind-ui/bottom-sheet-modal
 
-Simple bottom sheet modal for Angular, using Tailwind CSS.
+A responsive bottom sheet modal component for Angular applications that adapts to screen size. On mobile devices, it slides up from the bottom, while on desktop it appears as a centered modal dialog. Built with TailwindCSS for easy customization.
 
-![Demo animation](https://raw.githubusercontent.com/quedicesebas/ngx-tailwind-ui/main/projects/bottom-sheet-modal/demo.gif)
+![Bottom Sheet Modal Demo](https://raw.githubusercontent.com/quedicesebas/ngx-tailwind-ui/main/projects/bottom-sheet-modal/demo.gif)
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+## ✨ Features
 
-## Features
+- 📱 **Responsive Design**: Automatically adapts to screen size
+  - 📲 Mobile: Slides up from bottom
+  - 🖥️ Desktop: Centered modal dialog
+- 🎯 **Smooth Animations**: Built-in enter/exit transitions
+- ♿ **Accessibility**: ARIA labels and keyboard navigation support
+- 🌓 **Dark Mode**: Built-in support for dark mode themes
+- 🎨 **Customizable**: Easy to style with TailwindCSS
+- 📦 **Data Passing**: Pass data to modal components
+- 🖱️ **Backdrop Click**: Option to close on backdrop click
+- ⌨️ **Escape Key**: Option to close with Escape key
 
-- Create clear and reusable modal components.
-- It creating managing modals painless and clearer.
-- Pass data to the modal and implement any content you want
-- Open a modal from another. Stack several ones.
-- Responsive: displayed as bottom sheet on mobile and as modal dialog in desktop
+## 🎮 Demo
 
-## Demo
+View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see the component in action.
 
-View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui)
+## 🛠️ Prerequisites
 
-## Prerrequisites
+- Angular 17+ project
+- TailwindCSS 3 configured in your project
+- Angular animations
 
-- Tailwind CSS. Check [Angular installation](https://tailwindcss.com/docs/guides/angular)
+## 📦 Installation
 
-## Installation
-
-```shell
+```bash
 npm install @ngx-tailwind-ui/bottom-sheet-modal
 ```
 
-## Usage
-
-### 1. Add the bottom sheet modal wrapper to your app root. Import it into your component definition and add it to the end of the template:
-
-```typescript
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TauiBottomSheetModalComponent } from '@ngx-tailwind-ui/bottom-sheet-modal';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  template: `
-    <router-outlet></router-outlet>
-    <taui-bottom-sheet-modal />
-  `,
-  styleUrl: './app.component.scss',
-  imports: [RouterOutlet, TauiBottomSheetModalComponent],
-})
-export class AppComponent {
-  }
-}
-```
-
-### 2. Create a component with the modal content:
-
-```typescript
-import { Component, Input, inject } from "@angular/core";
-import { TauiBottomSheetModalService } from "@ngx-tailwind-ui/bottom-sheet-modal";
-
-@Component({
-  selector: "app-modal-content-component",
-  standalone: true,
-  imports: [],
-  template: `
-    <div class="pt-4 lg:w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white">
-      <div class="px-4">
-        <h1 class="font-bold text-xl">{{ title }}</h1>
-        <p>{{ description }}</p>
-      </div>
-      <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">ⓘ Tap outside, press Esc or click button below to close.</p>
-      <div class="px-4 overflow-auto md:max-h-96">
-        <p class="pt-4 font-semibold" (click)="expandedContent = !expandedContent">
-          {{ expandedContent ? "Show less content [-]" : "Show  more content [+]" }}
-        </p>
-        @if(expandedContent) {
-        <p class="py-24">Some text</p>
-        <p class="py-24">Some text</p>
-        <p class="py-24">Some text</p>
-        <p class="py-24">Some text</p>
-        }
-      </div>
-      <div class="p-4 flex justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 w-full md:rounded-b-xl">
-        <button type="button" (click)="close()" class="bg-cyan-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Close</button>
-      </div>
-    </div>
-  `,
-  styles: ``,
-})
-export class ModalContentComponent {
-  // Services
-  private readonly bottomSheetModalService = inject(TauiBottomSheetModalService);
-
-  // Inputs
-  @Input() title!: string;
-  @Input() description!: string;
-
-  // State
-  expandedContent: boolean = false;
-
-  close() {
-    this.bottomSheetModalService.closeBottomSheet();
-  }
-}
-```
-
-### 3. Modal trigger
-
-Inject the modal service to the component from which you want to open the modal. Now you can call `openBottomSheet` method any time you want to open the bottom sheet modal, using the `TauiBottomSheetModalConfig` object.
-
-#### TauiBottomSheetModalConfig
-
-| Name             | Required | Type                    | Default                          | Description                                                                                                           |
-| ---------------- | -------- | ----------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| contentComponent | true     | Type<any>               |                                  | Content component class                                                                                               |
-| inputs           | false    | Record<string, unknown> |                                  | An object containing the data. Each property of it can be mapped as an input property in the content component        |
-| onClose          | false    | () => void              |                                  | Callback function to be called when the modal is closed by the user                                                   |
-| canClose         | false    | boolean                 | true                             | Allows to close (dismiss) the modal tapping in the back shade or pressing the Escape (Esc) key                        |
-| showCloseButton  | false    | boolean                 | true                             | Show a close icon button in the top-rigth corner of the bottom sheet modal. Works only if `canClose` is set to `true` |
-| closeButtonClass | false    | string                  | text-gray-500 dark:text-gray-300 | Close icon button class                                                                                               |
-
-```typescript
-import { Component, inject } from "@angular/core";
-import { TauiBottomSheetModalService } from "@ngx-tailwind-ui/bottom-sheet-modal";
-import { ModalContentComponent } from "./modal-content-component.component";
-
-@Component({
-  selector: "app-component",
-  standalone: true,
-  template: `
-    <section class="dark:text-slate-300">
-      <h1 class="font-bold text-xl mt-4 mb-4">
-        Angular bottom sheet modal demo
-        <span class="bg-red-500 text-white rounded-full px-3 py-1 text-sm" [class.!bg-green-500]="opened">{{ opened ? "opened" : "closed" }}</span>
-      </h1>
-      <p class="mb-2">Simple bottom sheet modal for Angular, using Tailwind CSS.</p>
-      <button type="button" (click)="openBottomSheetModal()" class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg">Open Bottom sheet modal</button>
-    </section>
-  `,
-  styles: ``,
-  imports: [],
-})
-export class BottomSheetModalPageComponent {
-  // Services
-  private readonly bottomSheetModalService = inject(TauiBottomSheetModalService);
-
-  // State
-  opened: boolean = false;
-
-  constructor() {}
-
-  openBottomSheetModal() {
-    this.bottomSheetModalService.openBottomSheet({
-      contentComponent: ModalContentComponent,
-      inputs: {
-        title: "My modal",
-        description: "A simple bottom sheet modal :)",
-      },
-      onClose: () => {
-        this.opened = false;
-      },
-      closeButtonClass: "text-cyan-400 dark:text-cyan-200",
-    });
-    this.opened = true;
-  }
-}
-```
-
-As you can see, you can pass any data to the modal component using the `inputs` parameter of the `openBottomSheet` method. The data will be available in the modal component as `@Input` properties.
-
-### 4. Provide animations
-
-Add `provideAnimations()` to your providers in the `app.congif.ts` file:
+### Provide animations
 
 ```typescript
 import { provideAnimations } from "@angular/platform-browser/animations";
@@ -180,7 +43,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-### 5. Update Tailswind CSS config
+### Update Tailwind CSS config
 
 Include the `bottom-sheet-modal` styles. Add the following to the `content` section in your `tailwind.config.js` file:
 
@@ -194,6 +57,185 @@ module.exports = {
   plugins: [],
 };
 ```
+
+## 🚀 Usage
+
+### 1. Add the Component
+
+Add the bottom sheet modal wrapper to your app root component:
+
+```typescript
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { TauiBottomSheetModalComponent } from "@ngx-tailwind-ui/bottom-sheet-modal";
+
+@Component({
+  selector: "app-root",
+  template: `
+    <router-outlet></router-outlet>
+    <taui-bottom-sheet-modal />
+  `,
+  imports: [RouterOutlet, TauiBottomSheetModalComponent],
+})
+export class AppComponent {}
+```
+
+### 2. Create Modal Content Component
+
+Create a component for your modal content:
+
+```typescript
+import { Component, Input, inject } from "@angular/core";
+import { TauiBottomSheetModalService } from "@ngx-tailwind-ui/bottom-sheet-modal";
+
+@Component({
+  selector: "app-modal-content-component",
+  template: `
+    <div class="pt-4 md:w-96 bg-white dark:bg-slate-900 dark:text-white">
+      <div class="px-4">
+        <h1 class="font-bold text-xl">{{ title }}</h1>
+        <p>{{ description }}</p>
+      </div>
+      <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">ⓘ Tap outside, press Esc or click button below to close.</p>
+      <div class="p-4 flex justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 w-full md:rounded-b-xl">
+        <button type="button" (click)="close()" class="bg-cyan-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Close</button>
+      </div>
+    </div>
+  `,
+})
+export class ModalContentComponent {
+  private readonly bottomSheetModalService = inject(TauiBottomSheetModalService);
+
+  @Input() title!: string;
+  @Input() description!: string;
+
+  close() {
+    this.bottomSheetModalService.closeBottomSheet();
+  }
+}
+```
+
+### 3. Open the Modal
+
+Inject the service and open the modal:
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { TauiBottomSheetModalService } from "@ngx-tailwind-ui/bottom-sheet-modal";
+import { ModalContentComponent } from "./modal-content.component";
+
+@Component({
+  selector: "app-demo",
+  template: ` <button type="button" (click)="openModal()" class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg">Open Modal</button> `,
+})
+export class DemoComponent {
+  private readonly bottomSheetModalService = inject(TauiBottomSheetModalService);
+
+  openModal() {
+    this.bottomSheetModalService.openBottomSheet({
+      contentComponent: ModalContentComponent,
+      inputs: {
+        title: "Welcome",
+        description: "This is a responsive bottom sheet modal.",
+      },
+      onClose: () => {
+        console.log("Modal closed");
+      },
+    });
+  }
+}
+```
+
+## 📚 API Reference
+
+### BottomSheetModalService
+
+| Method             | Parameters                         | Description                                                   |
+| ------------------ | ---------------------------------- | ------------------------------------------------------------- |
+| `openBottomSheet`  | config: TauiBottomSheetModalConfig | Opens the bottom sheet modal with the specified configuration |
+| `closeBottomSheet` | -                                  | Closes the currently open bottom sheet modal                  |
+
+### TauiBottomSheetModalConfig
+
+| Property           | Type                    | Required | Default                            | Description                                                            |
+| ------------------ | ----------------------- | -------- | ---------------------------------- | ---------------------------------------------------------------------- |
+| `contentComponent` | Type<any>               | Yes      | -                                  | The component class to render inside the modal                         |
+| `inputs`           | Record<string, unknown> | No       | -                                  | Input properties to pass to the content component                      |
+| `onClose`          | () => void              | No       | -                                  | Callback function called when the modal is closed                      |
+| `canClose`         | boolean                 | No       | true                               | Whether the modal can be closed by clicking outside or pressing Escape |
+| `showCloseButton`  | boolean                 | No       | true                               | Whether to show the close button in the top-right corner               |
+| `closeButtonClass` | string                  | No       | "text-gray-500 dark:text-gray-300" | CSS classes for the close button                                       |
+
+## 💡 Examples
+
+### Basic Modal
+
+```typescript
+this.bottomSheetModalService.openBottomSheet({
+  contentComponent: SimpleModalComponent,
+  inputs: {
+    title: "Simple Modal",
+  },
+});
+```
+
+### Modal with Custom Close Button
+
+```typescript
+this.bottomSheetModalService.openBottomSheet({
+  contentComponent: CustomModalComponent,
+  showCloseButton: true,
+  closeButtonClass: "text-blue-500 hover:text-blue-700",
+});
+```
+
+### Modal with Callback
+
+```typescript
+this.bottomSheetModalService.openBottomSheet({
+  contentComponent: CallbackModalComponent,
+  onClose: () => {
+    // Handle modal close
+    console.log("Modal closed");
+  },
+});
+```
+
+## 🌐 Browser Support
+
+The package is tested and supported on the following browsers:
+
+- Chrome (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📦 Dependencies
+
+- **Peer Dependencies**:
+  - @angular/common: ^19.2.0
+  - @angular/core: ^19.2.0
+- **Runtime Dependencies**:
+  - tslib: ^2.3.0
+
+## ⚡ Performance Considerations
+
+- **Change Detection**: Optimized to minimize change detection cycles
+- **Lazy Loading**: Supports lazy loading for better initial load performance
+- **Bundle Size**: Minimal impact on bundle size
+- **Memory Usage**: Efficient memory management
+
+## ♿ Accessibility
+
+The component includes built-in accessibility features:
+
+- ARIA labels for screen readers
+- Keyboard navigation support
+- Focus management
+- Mobile-friendly interactions
+
+## 🤝 Contributing
+
+Contributions are welcome!
 
 ## 📄 License
 

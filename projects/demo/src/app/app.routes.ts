@@ -3,9 +3,14 @@ import { BottomSheetModalPageComponent } from './pages/bottom-sheet-modal/bottom
 import { HomePageComponent } from './pages/home-page.component';
 import { PhonenumbersPageComponent } from './pages/phonenumbers-page.component';
 import { ToastPageComponent } from './pages/toast-page.component';
+
+/**
+ * Application routes configuration.
+ * Defines the navigation structure and component mapping for the demo application.
+ */
 export const routes: Routes = [
   {
-    path: 'bottom-sheeet-modal',
+    path: 'bottom-sheet-modal',
     component: BottomSheetModalPageComponent,
   },
   {

@@ -1,107 +1,35 @@
-# Angular Tailwind UI - Toast
+# 🍞 @ngx-tailwind-ui/toast
 
-Simple toast component, using Tailwind CSS.
+A flexible and accessible toast notification system for Angular applications. This package provides a simple way to display temporary messages to users with various types, animations, and customization options.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+## ✨ Features
 
-## Features
+- 📝 **Multiple Types**: Support for info, success, warning, and error notifications
+- ⏱️ **Customizable Duration**: Set how long notifications stay visible
+- 📊 **Progress Bar**: Visual indicator of remaining display time
+- ❌ **Dismissible**: Users can manually close notifications
+- ♿ **Accessibility**: ARIA labels and keyboard navigation support
+- 🎨 **Dark Mode**: Built-in support for dark mode themes
+- 🎬 **Animations**: Smooth enter/exit transitions
+- 📚 **Stacking**: Multiple toasts can be displayed simultaneously
 
-- Show toast painless and clearer.
-- Different types (information, success, warining and error)
-- Dissmisable, duration configurable and with visual feedback
+## 🎮 Demo
 
-## Demo
+View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see the component in action.
 
-View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui)
+## 🛠️ Prerequisites
 
-## Prerrequisites
+- Angular 17+ project
+- TailwindCSS 3 configured in your project
+- Angular animations
 
-- Tailwind CSS. Check [Angular installation](https://tailwindcss.com/docs/guides/angular)
+## 📦 Installation
 
-## Installation
-
-```shell
+```bash
 npm install @ngx-tailwind-ui/toast
 ```
 
-## Usage
-
-### 1. Add the toast wrapper to your app root. Import it into your component definition and add it to the end of the template:
-
-```typescript
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TauiToastComponent } from '@ngx-tailwind-ui/toast';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  template: `
-    <router-outlet></router-outlet>
-    <taui-toast />
-  `,
-  styleUrl: './app.component.scss',
-  imports: [RouterOutlet, TauiToastComponent],
-})
-export class AppComponent {
-  }
-}
-```
-
-### 2. Show toast
-
-Inject the toast service to the component from which you want to show the toast. Now you can call `showToast` method any time you want to open the bottom sheet modal, using the `TauiToastConfig` object.
-
-#### TauiToastConfig
-
-| Name            | Required | Type    | Default | Description                                               |
-| --------------- | -------- | ------- | ------- | --------------------------------------------------------- |
-| message         | true     | string  |         | Message to be shown in the toast                          |
-| duration        | false    | number  | 3000    | Duration of the toast in milliseconds                     |
-| type            | false    | 'info'  |         | Type of the toast                                         |
-| showCloseButton | false    | boolean | true    | Show a close icon button in the rigth corner of the toast |
-
-```typescript
-import { Component, inject } from "@angular/core";
-import { TauiToastConfig, TauiToastService } from "toast";
-
-@Component({
-  selector: "app-component",
-  standalone: true,
-  template: `
-    <section class="dark:text-slate-300">
-      <h1 class="font-bold text-xl mt-4 mb-4">
-        Angular toast demo
-        <span class="bg-red-500 text-white rounded-full px-3 py-1 text-sm" [class.!bg-green-500]="toastStack().length > 0">showing {{ toastStack().length }}</span>
-      </h1>
-      <p class="mb-2">Simple toast for Angular, using Tailwind CSS.</p>
-      <button type="button" (click)="showToast()" class="bg-cyan-600 text-white leading-6 font-medium py-2 px-3 rounded-lg">Show a toast</button>
-    </section>
-  `,
-  styles: ``,
-  imports: [],
-})
-export class BottomSheetModalPageComponent {
-  // Services
-  private toastService = inject(TauiToastService);
-
-  toastStack = this.toastService.toastStack.asReadonly();
-
-  showToast() {
-    const type = "success";
-    this.toastService.showToast({
-      type: type,
-      message: `This is a ${type} message in a toast`,
-    });
-  }
-}
-```
-
-As you can see, you can pass any data to the modal component using the `inputs` parameter of the `openBottomSheet` method. The data will be available in the modal component as `@Input` properties.
-
-### 4. Provide animations
-
-Add `provideAnimations()` to your providers in the `app.congif.ts` file:
+### Provide animations
 
 ```typescript
 import { provideAnimations } from "@angular/platform-browser/animations";
@@ -111,7 +39,7 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-### 5. Update Tailswind CSS config
+### Update Tailwind CSS config
 
 Include the `toast` styles. Add the following to the `content` section in your `tailwind.config.js` file:
 
@@ -125,6 +53,153 @@ module.exports = {
   plugins: [],
 };
 ```
+
+## 🚀 Usage
+
+### 1. Add the Component
+
+Add the toast wrapper to your app root component:
+
+```typescript
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { TauiToastComponent } from "@ngx-tailwind-ui/toast";
+
+@Component({
+  selector: "app-root",
+  template: `
+    <router-outlet></router-outlet>
+    <taui-toast />
+  `,
+  imports: [RouterOutlet, TauiToastComponent],
+})
+export class AppComponent {}
+```
+
+### 2. Show Toasts
+
+Inject the toast service and show notifications:
+
+```typescript
+import { Component, inject } from "@angular/core";
+import { TauiToastService } from "@ngx-tailwind-ui/toast";
+
+@Component({
+  selector: "app-demo",
+  template: `
+    <section class="dark:text-slate-300">
+      <h1 class="font-bold text-xl mt-4 mb-4">
+        Angular Toast Demo
+        <span class="bg-red-500 text-white rounded-full px-3 py-1 text-sm" [class.!bg-green-500]="toastStack().length > 0"> Showing {{ toastStack().length }} toasts </span>
+      </h1>
+      <p class="mb-2">Simple toast for Angular, using Tailwind CSS.</p>
+      <div class="flex gap-2">
+        <button type="button" (click)="showToast('info')" class="bg-blue-500 text-white leading-6 font-medium py-2 px-3 rounded-lg">Show Info Toast</button>
+        <button type="button" (click)="showToast('success')" class="bg-green-500 text-white leading-6 font-medium py-2 px-3 rounded-lg">Show Success Toast</button>
+        <button type="button" (click)="showToast('warning')" class="bg-yellow-500 text-white leading-6 font-medium py-2 px-3 rounded-lg">Show Warning Toast</button>
+        <button type="button" (click)="showToast('error')" class="bg-red-500 text-white leading-6 font-medium py-2 px-3 rounded-lg">Show Error Toast</button>
+      </div>
+    </section>
+  `,
+})
+export class ToastDemoComponent {
+  private toastService = inject(TauiToastService);
+
+  toastStack = this.toastService.toastStack.asReadonly();
+
+  showToast(type: "info" | "success" | "warning" | "error") {
+    this.toastService.showToast({
+      type,
+      message: `This is a ${type} message in a toast`,
+    });
+  }
+}
+```
+
+## 📚 API Reference
+
+### TauiToastConfig
+
+| Property          | Type                                  | Required | Default | Description                                               |
+| ----------------- | ------------------------------------- | -------- | ------- | --------------------------------------------------------- |
+| `message`         | string                                | Yes      | -       | Message to be shown in the toast                          |
+| `duration`        | number                                | No       | 5000    | Duration of the toast in milliseconds                     |
+| `type`            | 'info'\|'success'\|'warning'\|'error' | No       | 'info'  | Type of the toast                                         |
+| `showCloseButton` | boolean                               | No       | true    | Show a close icon button in the right corner of the toast |
+
+### ToastService Methods
+
+| Method       | Parameters              | Description                                    |
+| ------------ | ----------------------- | ---------------------------------------------- |
+| `showToast`  | config: TauiToastConfig | Shows a toast with the specified configuration |
+| `closeToast` | toast: TauiToast        | Closes the specified toast                     |
+
+## 💡 Examples
+
+### Basic Toast
+
+```typescript
+this.toastService.showToast({
+  message: "Operation completed successfully",
+  type: "success",
+});
+```
+
+### Custom Duration
+
+```typescript
+this.toastService.showToast({
+  message: "This will stay for 10 seconds",
+  duration: 10000,
+  type: "info",
+});
+```
+
+### Without Close Button
+
+```typescript
+this.toastService.showToast({
+  message: "This toast cannot be manually closed",
+  showCloseButton: false,
+  type: "warning",
+});
+```
+
+## 🌐 Browser Support
+
+The package is tested and supported on the following browsers:
+
+- Chrome (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📦 Dependencies
+
+- **Peer Dependencies**:
+  - @angular/common: ^19.2.0
+  - @angular/core: ^19.2.0
+- **Runtime Dependencies**:
+  - tslib: ^2.3.0
+
+## ⚡ Performance Considerations
+
+- **Change Detection**: Optimized to minimize change detection cycles
+- **Lazy Loading**: Supports lazy loading for better initial load performance
+- **Bundle Size**: Minimal impact on bundle size
+- **Memory Usage**: Efficient memory management for multiple toasts
+
+## ♿ Accessibility
+
+The component includes built-in accessibility features:
+
+- ARIA labels for screen readers
+- Keyboard navigation support
+- Focus management
+- Mobile-friendly notifications
+
+## 🤝 Contributing
+
+Contributions are welcome!
 
 ## 📄 License
 

@@ -38,7 +38,13 @@ export class TauiPhonenumbersDirective implements Validator {
   }
 }
 
-/** A phone number must be a valid one */
+/**
+ * Validates that a phone number is valid according to the Google libphonenumber library
+ * @param phoneNumberValidationService Service to parse and validate the phone number
+ * @param countryCodeControl FormControl to store the country code
+ * @param defaultCountryCode Default country code to use if no country code is provided
+ * @returns ValidatorFn
+ */
 export function phoneNumberValidator(
   phoneNumberValidationService: TauiPhonenumbersService,
   countryCodeControl?: FormControl,

@@ -29,8 +29,8 @@ export class TauiToastService {
   toastStack = signal<TauiToast[]>([]);
 
   /**
-   * Opens the modal with the given parameters
-   * @param config BottomSheetModalConfig
+   * Shows a toast with the given configuration
+   * @param toastConfig Configuration for the toast to be displayed
    */
   showToast(toastConfig: TauiToastConfig): void {
     const config = {
@@ -48,7 +48,8 @@ export class TauiToastService {
   }
 
   /**
-   * Closes the modal with the given parameters
+   * Closes the specified toast
+   * @param toast The toast to be closed
    */
   closeToast(toast: TauiToast): void {
     this.toastStack.update((current) => current.filter((t) => t !== toast));

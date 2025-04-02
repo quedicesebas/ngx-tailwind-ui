@@ -5,9 +5,7 @@ import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
   selector: 'app-bottom-sheet-modal-content',
   imports: [],
   template: `
-    <div
-      class="pt-4 md:w-96 overflow-auto max-h-screen md:overflow-hidden bg-white dark:bg-slate-900 dark:text-white"
-    >
+    <div class="pt-4 w-96 bg-white dark:bg-slate-900 dark:text-white">
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title() }}</h1>
         <p>{{ description() }}</p>
@@ -20,15 +18,31 @@ import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
       <div class="px-4 pb-4 overflow-auto md:max-h-96">
         <p
           class="pt-4 font-semibold  cursor-pointer"
-          (click)="expandedContent = !expandedContent"
+          (click)="expandedContentInside = !expandedContentInside"
         >
           {{
-            expandedContent
+            expandedContentInside
               ? 'Show less content [-]'
-              : 'Show more content ang go fullscreen [+]'
+              : 'Show more content inside [+]'
           }}
         </p>
-        @if(expandedContent) {
+        @if(expandedContentInside) {
+        <p class="py-24">Some text</p>
+        <p class="py-24">Some text</p>
+        <p class="py-24">Some text</p>
+        <p class="py-24">Some text</p>
+        }
+      </div>
+      <div
+        class="p-4 font-semibold cursor-pointer"
+        (click)="expandedContentOutside = !expandedContentOutside"
+      >
+        {{
+          expandedContentOutside
+            ? 'Show less content [-]'
+            : 'Show more content outside [+]'
+        }}
+        @if(expandedContentOutside) {
         <p class="py-24">Some text</p>
         <p class="py-24">Some text</p>
         <p class="py-24">Some text</p>
@@ -76,7 +90,8 @@ export class BottomSheetModalContentComponent {
   readonly openOtherModal = input<boolean>();
 
   // State
-  expandedContent: boolean = false;
+  expandedContentInside: boolean = false;
+  expandedContentOutside: boolean = false;
 
   close() {
     this.bottomSheetModalService.closeBottomSheet();
