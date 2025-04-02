@@ -14,14 +14,19 @@
   <!-- bottom sheet -->
   <div
     @slideUp
-    class="col-span-1 col-start-1 row-span-1 row-start-1 self-end md:absolute md:bottom-0 md:left-0 md:right-0 md:top-0 md:m-auto md:rounded-xl relative max-h-screen overflow-hidden md:w-min"
+    class="col-span-1 col-start-1 row-span-1 row-start-1 self-end md:absolute overflow-hidden md:bottom-0 md:left-0 md:right-0 md:top-0 md:m-auto md:rounded-xl relative md:w-min"
     [class.rounded-t-none]="fullScreen"
     [class.rounded-t-xl]="!fullScreen"
     #bottomSheet
   >
-    <ng-container
-      *ngComponentOutlet="modal.contentComponent ?? null; inputs: modal.inputs"
-    />
+    <div class="overflow-auto max-h-screen md:max-h-[80vh]">
+      <ng-container
+        *ngComponentOutlet="
+          modal.contentComponent ?? null;
+          inputs: modal.inputs
+        "
+      />
+    </div>
     @if (modal.showCloseButton && modal.canClose) {
     <button
       class="top-2 right-2"
