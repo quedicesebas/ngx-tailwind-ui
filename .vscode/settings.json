@@ -13,6 +13,7 @@
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "editor.linkedEditing": true,
   "conventionalCommits.scopes": [
-    "bottom-sheet-modal"
+    "bottom-sheet-modal",
+    "toast"
   ]
 }

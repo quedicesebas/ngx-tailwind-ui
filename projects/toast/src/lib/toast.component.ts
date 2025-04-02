@@ -20,6 +20,7 @@ import { TauiToast, TauiToastService } from './toast.service';
   template: `
     <div
       class="fixed left-0 bottom-0 right-0 z-50 flex flex-col-reverse items-end gap-4 p-4"
+      [class.p-4]="toastStack().length > 0"
     >
       @for (toast of toastStack(); track toast) {
       <div @container>
