@@ -25,7 +25,29 @@ import { SafeResizeObserver } from './safe-resize-observer';
   imports: [NgComponentOutlet, TauiEscapeListenerDirective],
   host: { class: 'fixed z-40' },
   templateUrl: './bottom-sheet-modal.component.html',
-  styles: ``,
+  styles: `
+    /* On md or more, move close button away from the right border
+    Ref: https://csscade.com/can-you-detect-overflow-with-css/ */
+    @media (width >= 48rem) {
+      @keyframes detect-scroll {
+        from,
+        to {
+          --can-scroll: ;
+        }
+      }
+      .bottom-sheet-inner {
+        animation: detect-scroll linear;
+        animation-timeline: scroll(self);
+
+        --pos-if-can-scroll: var(--can-scroll) 1rem;
+        --pos-if-cant-scroll: .5rem;
+
+        .bottom-sheet-close-button {
+          right: var(--pos-if-can-scroll, var(--pos-if-cant-scroll));
+        }
+      }
+    }
+  `,
   animations: [
     trigger('fade', [
       transition(':enter', [

@@ -5,7 +5,7 @@ import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
   selector: 'app-bottom-sheet-modal-content',
   imports: [],
   template: `
-    <div class="pt-4 w-96 bg-white dark:bg-slate-900 dark:text-white">
+    <div class="pt-4 md:w-96 bg-white dark:bg-slate-900 dark:text-white">
       <div class="px-4">
         <h1 class="font-bold text-xl">{{ title() }}</h1>
         <p>{{ description() }}</p>
