@@ -1,15 +1,9 @@
-name: Publish
+name: Publish Packages
 on:
-  workflow_dispatch:
-    inputs:
-      project_name:
-        description: "Select the project to publish"
-        required: true
-        type: choice
-        options:
-          - bottom-sheet-modal
-          - phonenumbers
-          - toast
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   publish:
@@ -17,16 +11,87 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
           scope: "@ngx-tailwind-ui"
-      - run: npm ci
-      - run: npm run build ${{ inputs.project_name }}
-      - run: npm publish --access public
-        working-directory: /home/runner/work/ngx-tailwind-ui/ngx-tailwind-ui/dist/${{ inputs.project_name }}
+
+      - name: Get current versions
+        id: current_versions
+        run: |
+          echo "bottom_sheet_modal=$(node -p "require('./projects/bottom-sheet-modal/package.json').version")" >> $GITHUB_OUTPUT
+          echo "phonenumbers=$(node -p "require('./projects/phonenumbers/package.json').version")" >> $GITHUB_OUTPUT
+          echo "toast=$(node -p "require('./projects/toast/package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Get previous versions
+        id: previous_versions
+        run: |
+          git fetch --prune --unshallow || true
+          echo "bottom_sheet_modal=$(git show HEAD~1:projects/bottom-sheet-modal/package.json | node -p "JSON.parse(require('fs').readFileSync(0)).version")" >> $GITHUB_OUTPUT
+          echo "phonenumbers=$(git show HEAD~1:projects/phonenumbers/package.json | node -p "JSON.parse(require('fs').readFileSync(0)).version")" >> $GITHUB_OUTPUT
+          echo "toast=$(git show HEAD~1:projects/toast/package.json | node -p "JSON.parse(require('fs').readFileSync(0)).version")" >> $GITHUB_OUTPUT
+
+      - name: Check if versions changed
+        id: version_check
+        run: |
+          if [ "${{ steps.current_versions.outputs.bottom_sheet_modal }}" != "${{ steps.previous_versions.outputs.bottom_sheet_modal }}" ]; then
+            echo "bottom_sheet_modal_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "bottom_sheet_modal_changed=false" >> $GITHUB_OUTPUT
+          fi
+          if [ "${{ steps.current_versions.outputs.phonenumbers }}" != "${{ steps.previous_versions.outputs.phonenumbers }}" ]; then
+            echo "phonenumbers_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "phonenumbers_changed=false" >> $GITHUB_OUTPUT
+          fi
+          if [ "${{ steps.current_versions.outputs.toast }}" != "${{ steps.previous_versions.outputs.toast }}" ]; then
+            echo "toast_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "toast_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install dependencies
+        if: steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || steps.version_check.outputs.phonenumbers_changed == 'true' || steps.version_check.outputs.toast_changed == 'true'
+        run: npm ci
+
+      - name: Build Bottom Sheet Modal
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
+        run: npm run build bottom_sheet_modal
+
+      - name: Publish Bottom Sheet Modal
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
+        run: npm publish
+        working-directory: ./dist/bottom_sheet_modal
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build Phonenumbers
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
+        run: npm run build phonenumbers
+
+      - name: Publish Phonenumbers
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
+        run: npm publish
+        working-directory: ./dist/phonenumbers
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build Toast
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
+        run: npm run build toast
+
+      - name: Publish Toast
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
+        run: npm publish
+        working-directory: ./dist/toast
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
