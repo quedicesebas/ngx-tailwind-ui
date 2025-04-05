@@ -65,12 +65,12 @@ jobs:
 
       - name: Build Bottom Sheet Modal
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
-        run: npm run build bottom_sheet_modal
+        run: npm run build bottom-sheet-modal
 
       - name: Publish Bottom Sheet Modal
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
         run: npm publish
-        working-directory: ./dist/bottom_sheet_modal
+        working-directory: ./dist/bottom-sheet-modal
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

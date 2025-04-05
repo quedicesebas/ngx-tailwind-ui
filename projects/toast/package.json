@@ -1,6 +1,6 @@
 {
   "name": "@ngx-tailwind-ui/toast",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Angular 19 and TailwindCSS 3.4 Toast Component",
   "repository": {
     "type": "git",
