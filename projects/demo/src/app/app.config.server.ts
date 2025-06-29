@@ -1,6 +1,5 @@
+import { provideServerRendering, withRoutes } from '@angular/ssr';
 import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
-import { provideServerRendering } from '@angular/platform-server';
-import { provideServerRouting } from '@angular/ssr';
 import { appConfig } from './app.config';
 import { serverRoutes } from './app.routes.server';
 
@@ -9,7 +8,7 @@ import { serverRoutes } from './app.routes.server';
  * Extends the client configuration with server-specific providers for server-side rendering.
  */
 const serverConfig: ApplicationConfig = {
-  providers: [provideServerRendering(), provideServerRouting(serverRoutes)],
+  providers: [provideServerRendering(withRoutes(serverRoutes))],
 };
 
 /**

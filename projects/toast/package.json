@@ -1,7 +1,7 @@
 {
   "name": "@ngx-tailwind-ui/toast",
-  "version": "5.2.1",
-  "description": "Angular 19 and TailwindCSS 3.4 Toast Component",
+  "version": "5.3.0",
+  "description": "Angular 20 and TailwindCSS 3.4 Toast Component",
   "repository": {
     "type": "git",
     "url": "https://github.com/quedicesebas/ngx-tailwind-ui.git"
@@ -12,6 +12,7 @@
     "angular17",
     "angular18",
     "angular19",
+    "angular20",
     "ui",
     "dialog",
     "toast",
@@ -21,8 +22,8 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^19.2.0",
-    "@angular/core": "^19.2.0"
+    "@angular/common": "^20.0.5",
+    "@angular/core": "^20.0.5"
   },
   "dependencies": {
     "tslib": "^2.3.0"

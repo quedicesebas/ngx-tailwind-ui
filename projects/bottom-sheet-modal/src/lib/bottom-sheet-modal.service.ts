@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, Type, computed, signal } from '@angular/core';
+
+import { Inject, Injectable, Type, computed, signal, DOCUMENT } from '@angular/core';
 
 const configDefaults: TauiBottomSheetModalConfig = {
   contentComponent: null,
