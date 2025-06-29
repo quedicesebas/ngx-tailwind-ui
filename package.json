@@ -17,7 +17,8 @@
     "build:all": "ng build bottom-sheet-modal && ng build toast && ng build phonenumbers",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "release": "npm version --no-git-tag-version --workspaces=true"
+    "release": "npm version --no-git-tag-version --workspaces=true",
+    "angular:update": "ng update @angular/core@latest @angular/cli@latest"
   },
   "private": true,
   "dependencies": {
