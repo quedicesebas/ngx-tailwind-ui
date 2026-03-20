@@ -128,12 +128,12 @@ The package is tested and supported on the following browsers:
 ## 📦 Dependencies
 
 - **Peer Dependencies**:
-  - @angular/common: ^19.2.0
-  - @angular/core: ^19.2.0
-  - @angular/forms: ^19.2.0
-  - awesome-phonenumber: ^7.2.0
+  - @angular/common
+  - @angular/core
+  - @angular/forms
+  - awesome-phonenumber
 - **Runtime Dependencies**:
-  - tslib: ^2.3.0
+  - tslib
 
 ## ⚡ Performance Considerations
 
