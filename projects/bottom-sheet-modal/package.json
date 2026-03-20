@@ -26,8 +26,8 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^21.0.1",
-    "@angular/core": "^21.0.1"
+    "@angular/common": "^21.0.5",
+    "@angular/core": "^21.0.5"
   },
   "dependencies": {
     "tslib": "^2.3.0"
