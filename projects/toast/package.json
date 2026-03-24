@@ -4,7 +4,11 @@
   "description": "Angular 20 and TailwindCSS 3.4 Toast Component",
   "repository": {
     "type": "git",
-    "url": "https://github.com/quedicesebas/ngx-tailwind-ui.git"
+    "url": "git+https://github.com/quedicesebas/ngx-tailwind-ui.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "license": "MIT",
   "keywords": [
@@ -22,8 +26,8 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^21.0.5",
-    "@angular/core": "^21.0.5"
+    "@angular/common": "^21.2.3",
+    "@angular/core": "^21.2.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"

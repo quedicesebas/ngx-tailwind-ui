@@ -9,21 +9,19 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
+      contents: write
       id-token: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
-          scope: "@ngx-tailwind-ui"
+          node-version: 24
+          registry-url: https://registry.npmjs.org
 
       - name: Get current versions
         id: current_versions
@@ -67,31 +65,55 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
         run: npm run build bottom-sheet-modal
 
+
       - name: Publish Bottom Sheet Modal
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
-        run: npm publish
+        run: npm publish --provenance
         working-directory: ./dist/bottom-sheet-modal
+
+      - name: Create Release Bottom Sheet Modal
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
+        run: |
+          gh release create "bottom-sheet-modal@v${{ steps.current_versions.outputs.bottom_sheet_modal }}" \
+            --title "bottom-sheet-modal v${{ steps.current_versions.outputs.bottom_sheet_modal }}" \
+            --notes "Automated release for bottom-sheet-modal v${{ steps.current_versions.outputs.bottom_sheet_modal }}"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Phonenumbers
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
         run: npm run build phonenumbers
 
+
       - name: Publish Phonenumbers
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
-        run: npm publish
+        run: npm publish --provenance
         working-directory: ./dist/phonenumbers
+
+      - name: Create Release Phonenumbers
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
+        run: |
+          gh release create "phonenumbers@v${{ steps.current_versions.outputs.phonenumbers }}" \
+            --title "phonenumbers v${{ steps.current_versions.outputs.phonenumbers }}" \
+            --notes "Automated release for phonenumbers v${{ steps.current_versions.outputs.phonenumbers }}"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Toast
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
         run: npm run build toast
 
+
       - name: Publish Toast
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
-        run: npm publish
+        run: npm publish --provenance
         working-directory: ./dist/toast
+
+      - name: Create Release Toast
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
+        run: |
+          gh release create "toast@v${{ steps.current_versions.outputs.toast }}" \
+            --title "toast v${{ steps.current_versions.outputs.toast }}" \
+            --notes "Automated release for toast v${{ steps.current_versions.outputs.toast }}"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

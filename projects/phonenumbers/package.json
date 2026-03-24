@@ -4,7 +4,11 @@
   "description": "Directive and service to handle phone numbers with Google libphonenumber library",
   "repository": {
     "type": "git",
-    "url": "https://github.com/quedicesebas/ngx-tailwind-ui.git"
+    "url": "git+https://github.com/quedicesebas/ngx-tailwind-ui.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "license": "MIT",
   "keywords": [
@@ -21,9 +25,9 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^21.0.5",
-    "@angular/core": "^21.0.5",
-    "@angular/forms": "^21.0.5",
+    "@angular/common": "^21.2.3",
+    "@angular/core": "^21.2.3",
+    "@angular/forms": "^21.2.3",
     "awesome-phonenumber": "^7.8.0"
   },
   "dependencies": {

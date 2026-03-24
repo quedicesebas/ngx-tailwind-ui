@@ -123,7 +123,7 @@ All components are tested and supported on:
 
 ## 🤝 Contributing
 
-We welcome contributions!
+We welcome contributions! Please see our [CONTRIBUTE.md](CONTRIBUTE.md) for guidelines on how to get started and contribute to this project.
 
 ## 📄 License
 
