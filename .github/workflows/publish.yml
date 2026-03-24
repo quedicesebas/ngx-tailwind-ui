@@ -63,60 +63,114 @@ jobs:
             echo "toast_changed=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Check existence on NPM and GitHub
+        id: existence_check
+        run: |
+          # Bottom Sheet Modal
+          if npm view @ngx-tailwind-ui/bottom-sheet-modal@${{ steps.current_versions.outputs.bottom_sheet_modal }} version >/dev/null 2>&1; then
+            echo "bottom_sheet_modal_npm_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "bottom_sheet_modal_npm_exists=false" >> $GITHUB_OUTPUT
+          fi
+          if gh release view "bottom-sheet-modal@v${{ steps.current_versions.outputs.bottom_sheet_modal }}" >/dev/null 2>&1; then
+            echo "bottom_sheet_modal_gh_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "bottom_sheet_modal_gh_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Phonenumbers
+          if npm view @ngx-tailwind-ui/phonenumbers@${{ steps.current_versions.outputs.phonenumbers }} version >/dev/null 2>&1; then
+            echo "phonenumbers_npm_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "phonenumbers_npm_exists=false" >> $GITHUB_OUTPUT
+          fi
+          if gh release view "phonenumbers@v${{ steps.current_versions.outputs.phonenumbers }}" >/dev/null 2>&1; then
+            echo "phonenumbers_gh_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "phonenumbers_gh_exists=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Toast
+          if npm view @ngx-tailwind-ui/toast@${{ steps.current_versions.outputs.toast }} version >/dev/null 2>&1; then
+            echo "toast_npm_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "toast_npm_exists=false" >> $GITHUB_OUTPUT
+          fi
+          if gh release view "toast@v${{ steps.current_versions.outputs.toast }}" >/dev/null 2>&1; then
+            echo "toast_gh_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "toast_gh_exists=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Install dependencies
-        if: steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || steps.version_check.outputs.phonenumbers_changed == 'true' || steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true
+        if: |
+          (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || steps.version_check.outputs.phonenumbers_changed == 'true' || steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true) &&
+          (steps.existence_check.outputs.bottom_sheet_modal_npm_exists == 'false' || steps.existence_check.outputs.bottom_sheet_modal_gh_exists == 'false' ||
+           steps.existence_check.outputs.phonenumbers_npm_exists == 'false' || steps.existence_check.outputs.phonenumbers_gh_exists == 'false' ||
+           steps.existence_check.outputs.toast_npm_exists == 'false' || steps.existence_check.outputs.toast_gh_exists == 'false')
         run: npm ci
 
       - name: Build Bottom Sheet Modal
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true) && (steps.existence_check.outputs.bottom_sheet_modal_npm_exists == 'false' || steps.existence_check.outputs.bottom_sheet_modal_gh_exists == 'false')
         run: npm run build bottom-sheet-modal
 
       - name: Publish Bottom Sheet Modal
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true) && steps.existence_check.outputs.bottom_sheet_modal_npm_exists == 'false'
         run: npm publish --provenance
         working-directory: ./dist/bottom-sheet-modal
 
       - name: Create Release Bottom Sheet Modal
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true) && steps.existence_check.outputs.bottom_sheet_modal_gh_exists == 'false'
         run: |
+          PREVIOUS_TAG=$(git describe --tags --match "bottom-sheet-modal@*" --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          CHANGES=$(git log $PREVIOUS_TAG..HEAD --oneline -- projects/bottom-sheet-modal)
           gh release create "bottom-sheet-modal@v${{ steps.current_versions.outputs.bottom_sheet_modal }}" \
             --title "bottom-sheet-modal v${{ steps.current_versions.outputs.bottom_sheet_modal }}" \
-            --generate-notes
+            --notes "### Cambios en esta versión:
+            $CHANGES"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Phonenumbers
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true) && (steps.existence_check.outputs.phonenumbers_npm_exists == 'false' || steps.existence_check.outputs.phonenumbers_gh_exists == 'false')
         run: npm run build phonenumbers
 
       - name: Publish Phonenumbers
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true) && steps.existence_check.outputs.phonenumbers_npm_exists == 'false'
         run: npm publish --provenance
         working-directory: ./dist/phonenumbers
 
       - name: Create Release Phonenumbers
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true) && steps.existence_check.outputs.phonenumbers_gh_exists == 'false'
         run: |
+          PREVIOUS_TAG=$(git describe --tags --match "phonenumbers@*" --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          CHANGES=$(git log $PREVIOUS_TAG..HEAD --oneline -- projects/phonenumbers)
           gh release create "phonenumbers@v${{ steps.current_versions.outputs.phonenumbers }}" \
             --title "phonenumbers v${{ steps.current_versions.outputs.phonenumbers }}" \
-            --generate-notes
+            --notes "### Cambios en esta versión:
+            $CHANGES"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Toast
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true) && (steps.existence_check.outputs.toast_npm_exists == 'false' || steps.existence_check.outputs.toast_gh_exists == 'false')
         run: npm run build toast
 
       - name: Publish Toast
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true) && steps.existence_check.outputs.toast_npm_exists == 'false'
         run: npm publish --provenance
         working-directory: ./dist/toast
 
       - name: Create Release Toast
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true)
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true) && steps.existence_check.outputs.toast_gh_exists == 'false'
         run: |
+          PREVIOUS_TAG=$(git describe --tags --match "toast@*" --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          CHANGES=$(git log $PREVIOUS_TAG..HEAD --oneline -- projects/toast)
           gh release create "toast@v${{ steps.current_versions.outputs.toast }}" \
             --title "toast v${{ steps.current_versions.outputs.toast }}" \
-            --generate-notes
+            --notes "### Cambios en esta versión:
+            $CHANGES"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
