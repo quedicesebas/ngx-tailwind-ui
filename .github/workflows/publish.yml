@@ -4,6 +4,12 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      force_publish_all:
+        description: "Force publish all packages (skips version check)"
+        type: boolean
+        default: false
 
 jobs:
   publish:
@@ -58,21 +64,20 @@ jobs:
           fi
 
       - name: Install dependencies
-        if: steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || steps.version_check.outputs.phonenumbers_changed == 'true' || steps.version_check.outputs.toast_changed == 'true'
+        if: steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || steps.version_check.outputs.phonenumbers_changed == 'true' || steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true
         run: npm ci
 
       - name: Build Bottom Sheet Modal
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true)
         run: npm run build bottom-sheet-modal
 
-
       - name: Publish Bottom Sheet Modal
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true)
         run: npm publish --provenance
         working-directory: ./dist/bottom-sheet-modal
 
       - name: Create Release Bottom Sheet Modal
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.bottom_sheet_modal_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.bottom_sheet_modal_changed == 'true' || inputs.force_publish_all == true)
         run: |
           gh release create "bottom-sheet-modal@v${{ steps.current_versions.outputs.bottom_sheet_modal }}" \
             --title "bottom-sheet-modal v${{ steps.current_versions.outputs.bottom_sheet_modal }}" \
@@ -81,17 +86,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Phonenumbers
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true)
         run: npm run build phonenumbers
 
-
       - name: Publish Phonenumbers
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true)
         run: npm publish --provenance
         working-directory: ./dist/phonenumbers
 
       - name: Create Release Phonenumbers
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.phonenumbers_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.phonenumbers_changed == 'true' || inputs.force_publish_all == true)
         run: |
           gh release create "phonenumbers@v${{ steps.current_versions.outputs.phonenumbers }}" \
             --title "phonenumbers v${{ steps.current_versions.outputs.phonenumbers }}" \
@@ -100,17 +104,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Toast
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true)
         run: npm run build toast
 
-
       - name: Publish Toast
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true)
         run: npm publish --provenance
         working-directory: ./dist/toast
 
       - name: Create Release Toast
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.version_check.outputs.toast_changed == 'true'
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (steps.version_check.outputs.toast_changed == 'true' || inputs.force_publish_all == true)
         run: |
           gh release create "toast@v${{ steps.current_versions.outputs.toast }}" \
             --title "toast v${{ steps.current_versions.outputs.toast }}" \

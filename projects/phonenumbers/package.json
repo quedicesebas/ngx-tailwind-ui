@@ -1,6 +1,6 @@
 {
   "name": "@ngx-tailwind-ui/phonenumbers",
-  "version": "6.0.0",
+  "version": "6.0.2",
   "description": "Directive and service to handle phone numbers with Google libphonenumber library",
   "repository": {
     "type": "git",

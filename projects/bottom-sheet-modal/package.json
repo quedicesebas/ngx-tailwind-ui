@@ -1,6 +1,6 @@
 {
   "name": "@ngx-tailwind-ui/bottom-sheet-modal",
-  "version": "6.0.0",
+  "version": "6.0.2",
   "description": "Angular 20 and TailwindCSS 3.4 Bottom Sheet Modal",
   "repository": {
     "type": "git",
