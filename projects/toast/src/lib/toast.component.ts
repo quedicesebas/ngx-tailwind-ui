@@ -112,6 +112,7 @@ import { TauiToast, TauiToastService } from './toast.service';
             </svg>
           </button>
         </div>
+        @if (toast.config.autoClose) {
         <div class="w-full bg-gray-200 h-1 dark:bg-gray-700">
           <div
             class="h-1"
@@ -127,6 +128,7 @@ import { TauiToast, TauiToastService } from './toast.service';
             }}%"
           ></div>
         </div>
+        }
       </div>
       }
     </div>

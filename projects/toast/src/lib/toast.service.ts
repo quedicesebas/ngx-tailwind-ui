@@ -4,11 +4,13 @@ const configDefaults: TauiToastConfig = {
   duration: 5000,
   type: 'info',
   showCloseButton: true,
+  autoClose: true,
 };
 
 export interface TauiToast {
   config: TauiToastConfig;
   remainingTime: number;
+  intervalId?: any;
 }
 
 export interface TauiToastConfig {
@@ -20,6 +22,8 @@ export interface TauiToastConfig {
   type?: 'info' | 'success' | 'error' | 'warning';
   /** Show close button. Default: true */
   showCloseButton?: boolean;
+  /** Whether the toast should close automatically. Default: true */
+  autoClose?: boolean;
 }
 
 @Injectable({
@@ -37,14 +41,19 @@ export class TauiToastService {
       ...configDefaults,
       ...toastConfig,
     };
-    const toast = { config, remainingTime: config.duration! };
+    const toast: TauiToast = { config, remainingTime: config.duration! };
     this.toastStack.update((current) => [...current, toast]);
-    setInterval(() => {
-      toast.remainingTime = toast.remainingTime! - config.duration! / 100;
-      if (toast.remainingTime == 0) {
-        this.closeToast(toast);
-      }
-    }, config.duration! / 100);
+
+    if (config.autoClose) {
+      const interval = setInterval(() => {
+        toast.remainingTime = toast.remainingTime! - config.duration! / 100;
+        if (toast.remainingTime <= 0) {
+          clearInterval(interval);
+          this.closeToast(toast);
+        }
+      }, config.duration! / 100);
+      toast.intervalId = interval;
+    }
   }
 
   /**
@@ -52,6 +61,9 @@ export class TauiToastService {
    * @param toast The toast to be closed
    */
   closeToast(toast: TauiToast): void {
+    if (toast.intervalId) {
+      clearInterval(toast.intervalId);
+    }
     this.toastStack.update((current) => current.filter((t) => t !== toast));
   }
 }

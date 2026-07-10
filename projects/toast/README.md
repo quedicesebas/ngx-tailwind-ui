@@ -126,6 +126,7 @@ export class ToastDemoComponent {
 | `duration`        | number                                | No       | 5000    | Duration of the toast in milliseconds                     |
 | `type`            | 'info'\|'success'\|'warning'\|'error' | No       | 'info'  | Type of the toast                                         |
 | `showCloseButton` | boolean                               | No       | true    | Show a close icon button in the right corner of the toast |
+| `autoClose`       | boolean                               | No       | true    | Whether the toast should close automatically              |
 
 ### ToastService Methods
 
@@ -162,6 +163,16 @@ this.toastService.showToast({
   message: "This toast cannot be manually closed",
   showCloseButton: false,
   type: "warning",
+});
+```
+
+### Persistent Toast (No Auto Close)
+
+```typescript
+this.toastService.showToast({
+  message: "This notification will stay until manually closed",
+  autoClose: false,
+  type: "info",
 });
 ```
 

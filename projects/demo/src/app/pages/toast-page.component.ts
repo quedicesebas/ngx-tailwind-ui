@@ -97,6 +97,13 @@ import { TauiToastConfig, TauiToastService } from 'toast';
         >
           Show error toast
         </button>
+        <button
+          type="button"
+          (click)="showPersistentToast()"
+          class="bg-indigo-600 hover:bg-indigo-700 text-white leading-6 font-medium py-2 px-3 rounded-lg"
+        >
+          Show persistent toast (no auto close)
+        </button>
       </div>
     </section>
   `,
@@ -118,6 +125,17 @@ export class ToastPageComponent {
     this.toastService.showToast({
       type: type,
       message: `This is a ${type} message in a toast`,
+    });
+  }
+
+  /**
+   * Shows a persistent toast notification that does not close automatically.
+   */
+  showPersistentToast() {
+    this.toastService.showToast({
+      type: 'info',
+      message: 'This is a persistent toast that will not close automatically.',
+      autoClose: false,
     });
   }
 }
