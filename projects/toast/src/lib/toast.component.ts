@@ -87,7 +87,7 @@ import { TauiToast, TauiToastService } from './toast.service';
             <span class="sr-only">Information icon</span>
             }
           </div>
-          <div class="text-sm font-normal">{{ toast.config.message }}</div>
+          <div class="text-sm font-normal flex-1">{{ toast.config.message }}</div>
           <button
             type="button"
             class="rounded-lg focus:ring-2 focus:ring-gray-300 inline-flex items-center justify-center h-8 w-8 dark:text-white dark:hover:text-white hover:opacity-75 shrink-0"
