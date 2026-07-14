@@ -1,5 +1,5 @@
 
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
 import { TauiPhonenumbersDirective } from 'phonenumbers';
@@ -162,6 +162,7 @@ const initialValue = {
       </div>
     `,
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, TauiPhonenumbersDirective],
 })
 export class PhonenumbersPageComponent {
@@ -212,6 +213,7 @@ export class PhonenumbersPageComponent {
       </p>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: '',
 })
 export class InfoModal {

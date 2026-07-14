@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { TauiToastConfig, TauiToastService } from 'toast';
 
 /**
@@ -108,6 +108,7 @@ import { TauiToastConfig, TauiToastService } from 'toast';
     </section>
   `,
   styles: ``,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [],
 })
 export class ToastPageComponent {

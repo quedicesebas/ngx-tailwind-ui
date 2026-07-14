@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { TauiToast, TauiToastService } from './toast.service';
 
 /**
@@ -133,6 +133,7 @@ import { TauiToast, TauiToastService } from './toast.service';
       }
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: `
     @keyframes fadeSlideIn {
       from {

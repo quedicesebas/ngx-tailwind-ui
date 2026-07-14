@@ -1,6 +1,6 @@
 {
   "name": "@ngx-tailwind-ui/phonenumbers",
-  "version": "6.0.3",
+  "version": "7.0.0",
   "description": "Directive and service to handle phone numbers with Google libphonenumber library",
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
     "angular18",
     "angular19",
     "angular20",
+    "angular21",
+    "angular22",
     "ui",
     "input",
     "phonenumber",
@@ -25,9 +27,9 @@
     "angularx"
   ],
   "peerDependencies": {
-    "@angular/common": "^21.2.3",
-    "@angular/core": "^21.2.3",
-    "@angular/forms": "^21.2.3",
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
     "awesome-phonenumber": "^7.8.0"
   },
   "dependencies": {

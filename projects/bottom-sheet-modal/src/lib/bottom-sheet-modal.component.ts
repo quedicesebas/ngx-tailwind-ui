@@ -15,6 +15,7 @@ import {
   ViewChildren,
   effect,
   inject,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { TauiBottomSheetModalService } from './bottom-sheet-modal.service';
 import { TauiEscapeListenerDirective } from './escape-listener.directive';
@@ -48,6 +49,7 @@ import { SafeResizeObserver } from './safe-resize-observer';
       }
     }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger('fade', [
       transition(':enter', [

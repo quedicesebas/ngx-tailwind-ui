@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
 import { BottomSheetModalContentComponent } from './bottom-sheet-modal-content.component';
 
 @Component({
   selector: 'app-bottom-sheet-modal-page',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <nav class="flex mb-4" aria-label="Breadcrumb">
       <ol

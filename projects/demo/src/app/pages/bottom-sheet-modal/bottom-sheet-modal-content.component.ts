@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
 
 @Component({
@@ -74,6 +74,7 @@ import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
       }
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: '',
 })
 export class BottomSheetModalContentComponent {
