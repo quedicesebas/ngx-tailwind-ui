@@ -20,7 +20,7 @@ View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see the com
 ## 🛠️ Prerequisites
 
 - Angular 17+ project
-- TailwindCSS 3 configured in your project
+- Tailwind CSS (v3 or v4) configured in your project
 - Angular forms
 
 ## 📦 Installation

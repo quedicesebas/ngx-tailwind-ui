@@ -24,7 +24,7 @@ View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see the com
 ## 🛠️ Prerequisites
 
 - Angular 17+ project
-- TailwindCSS 3 configured in your project
+- Tailwind CSS (v3 or v4) configured in your project
 - Angular animations
 
 ## 📦 Installation
@@ -43,9 +43,21 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-### Update Tailwind CSS config
+### Configure Tailwind CSS
 
-Include the `bottom-sheet-modal` styles. Add the following to the `content` section in your `tailwind.config.js` file:
+To scan the bottom sheet modal for styles:
+
+#### For Tailwind CSS v4 (Recommended)
+Add the `@source` directive to your main stylesheet (e.g. `src/styles.scss` or `src/styles.css`):
+
+```css
+@import "tailwindcss";
+
+@source "../node_modules/@ngx-tailwind-ui/bottom-sheet-modal/**/*.{html,ts,js,mjs}";
+```
+
+#### For Tailwind CSS v3
+Add the package path to the `content` array in your `tailwind.config.js` file:
 
 ```js
 /** @type {import('tailwindcss').Config} */
@@ -97,7 +109,7 @@ import { TauiBottomSheetModalService } from "@ngx-tailwind-ui/bottom-sheet-modal
         <p>{{ description }}</p>
       </div>
       <p class="px-4 py-2 mt-4 bg-slate-200 dark:bg-slate-700">ⓘ Tap outside, press Esc or click button below to close.</p>
-      <div class="p-4 flex justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 w-full md:rounded-b-xl">
+      <div class="p-4 flex justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 border-gray-200 dark:border-slate-700 w-full md:rounded-b-xl">
         <button type="button" (click)="close()" class="bg-cyan-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Close</button>
       </div>
     </div>

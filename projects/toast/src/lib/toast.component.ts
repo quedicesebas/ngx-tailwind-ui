@@ -16,7 +16,7 @@ import { TauiToast, TauiToastService } from './toast.service';
     >
       @for (toast of toastStack(); track toast) {
       <div
-        class="w-full md:max-w-[50dvw] rounded-lg border dark:border-gray-700 shadow-sm dark:text-gray-50 overflow-hidden bg-white dark:bg-gray-800"
+        class="w-full md:max-w-[50dvw] rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm dark:text-gray-50 overflow-hidden bg-white dark:bg-gray-800"
         role="alert"
         animate.enter="fade-slide-in"
         animate.leave="fade-slide-out"

@@ -1,10 +1,10 @@
 # Angular Tailwind UI
 
-A collection of easy-to-use Angular components, directives, and services built with Angular 19 and TailwindCSS 3. This library provides a set of modern, accessible, and customizable UI components that follow best practices and integrate seamlessly with your Angular applications.
+A collection of easy-to-use Angular components, directives, and services built with Angular and Tailwind CSS. The library packages are fully compatible with both **Tailwind CSS v3 (using library version 7.0.0)** and **Tailwind CSS v4 (using library version 7.1.0+)**. This library provides a set of modern, accessible, and customizable UI components that follow best practices and integrate seamlessly with your Angular applications.
 
 ## ✨ Features
 
-- 🎨 **Modern Design**: Built with TailwindCSS 3 for beautiful, responsive components
+- 🎨 **Modern Design**: Built to integrate seamlessly with Tailwind CSS v3 and v4 for beautiful, responsive components
 - 🚀 **Angular 19 Ready**: Fully compatible with the latest Angular version
 - ♿ **Accessibility First**: All components follow WCAG guidelines
 - 🌙 **Dark Mode Support**: Built-in dark mode support for all components
@@ -67,8 +67,8 @@ View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see all com
 ## 🛠️ Prerequisites
 
 - Angular 17+ project
-- TailwindCSS 3
-- And package specific ones
+- Tailwind CSS (v3 or v4) configured in your project
+- Package-specific prerequisites (such as Angular animations)
 
 ## 🚀 Quick Start
 
@@ -86,19 +86,27 @@ import { TauiToastComponent } from "@ngx-tailwind-ui/toast";
 import { TauiPhonenumbersDirective } from "@ngx-tailwind-ui/phonenumbers";
 ```
 
-3. Add TailwindCSS to your project if not already installed:
+3. Configure Tailwind CSS to scan the library files for utility classes:
 
-```bash
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init
+### For Tailwind CSS v4 (Recommended)
+Add `@source` directives to your main stylesheet (e.g. `src/styles.scss` or `src/styles.css`):
+
+```css
+@import "tailwindcss";
+
+@source "../node_modules/@ngx-tailwind-ui/**/*.{html,ts,js,mjs}";
 ```
 
-4. Configure your `tailwind.config.js`:
+### For Tailwind CSS v3
+Add the library path to the `content` array in your `tailwind.config.js` file:
 
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,ts}", "./node_modules/@ngx-tailwind-ui/**/*.{html,ts,js,mjs}"],
+  content: [
+    "./src/**/*.{html,ts}",
+    "./node_modules/@ngx-tailwind-ui/**/*.{html,ts,js,mjs}"
+  ],
   theme: {
     extend: {},
   },

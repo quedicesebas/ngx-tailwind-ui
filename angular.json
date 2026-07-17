@@ -37,7 +37,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "css"
         }
       },
       "root": "projects/demo",
@@ -52,14 +52,14 @@
             "browser": "projects/demo/src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "projects/demo/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "css",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "projects/demo/public"
               }
             ],
-            "styles": ["projects/demo/src/styles.scss"],
+            "styles": ["projects/demo/src/styles.css"],
             "scripts": [],
             "server": "projects/demo/src/main.server.ts",
             "outputMode": "server",

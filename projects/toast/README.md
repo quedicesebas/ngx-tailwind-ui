@@ -20,7 +20,7 @@ View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see the com
 ## 🛠️ Prerequisites
 
 - Angular 17+ project
-- TailwindCSS 3 configured in your project
+- Tailwind CSS (v3 or v4) configured in your project
 - Angular animations
 
 ## 📦 Installation
@@ -39,9 +39,21 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-### Update Tailwind CSS config
+### Configure Tailwind CSS
 
-Include the `toast` styles. Add the following to the `content` section in your `tailwind.config.js` file:
+To scan the toast component for styles:
+
+#### For Tailwind CSS v4 (Recommended)
+Add the `@source` directive to your main stylesheet (e.g. `src/styles.scss` or `src/styles.css`):
+
+```css
+@import "tailwindcss";
+
+@source "../node_modules/@ngx-tailwind-ui/toast/**/*.{html,ts,js,mjs}";
+```
+
+#### For Tailwind CSS v3
+Add the package path to the `content` array in your `tailwind.config.js` file:
 
 ```js
 /** @type {import('tailwindcss').Config} */

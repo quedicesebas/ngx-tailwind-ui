@@ -51,7 +51,7 @@ import { TauiBottomSheetModalService } from 'bottom-sheet-modal';
       </div>
       @if (showOKButton() || openOtherModal()) {
       <div
-        class="p-4 flex gap-2 justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 w-full md:rounded-b-xl"
+        class="p-4 flex gap-2 justify-end sticky bottom-0 bg-white dark:bg-slate-900 border-t-2 border-gray-200 dark:border-slate-700 w-full md:rounded-b-xl"
       >
         @if (openOtherModal()) {
         <button

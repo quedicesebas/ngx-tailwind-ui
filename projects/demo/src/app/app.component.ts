@@ -12,7 +12,7 @@ import { TauiToastComponent } from 'toast';
   imports: [RouterOutlet, TauiBottomSheetModalComponent, TauiToastComponent],
   changeDetection: ChangeDetectionStrategy.Eager,
   template: `
-    <div class="container mx-auto max-w-screen-xl p-4">
+    <div class="container mx-auto max-w-[theme(screens.xl)] p-4">
       <router-outlet></router-outlet>
     </div>
     <taui-bottom-sheet-modal />
