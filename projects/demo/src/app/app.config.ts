@@ -6,18 +6,16 @@ import {
   withEventReplay,
   withNoIncrementalHydration
 } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 
 /**
  * Application configuration for the client-side environment.
- * Configures routing, animations, client hydration, and zone change detection.
+ * Configures routing, client hydration, and zone change detection.
  */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay(), withNoIncrementalHydration()),
-    provideAnimations(),
   ],
 };

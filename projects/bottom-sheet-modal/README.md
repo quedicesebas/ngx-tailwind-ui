@@ -25,22 +25,11 @@ View the live [demo](https://stackblitz.com/edit/ngx-tailwind-ui) to see the com
 
 - Angular 17+ project
 - Tailwind CSS (v3 or v4) configured in your project
-- Angular animations
 
 ## 📦 Installation
 
 ```bash
 npm install @ngx-tailwind-ui/bottom-sheet-modal
-```
-
-### Provide animations
-
-```typescript
-import { provideAnimations } from "@angular/platform-browser/animations";
-
-export const appConfig: ApplicationConfig = {
-  providers: [...provideAnimations()],
-};
 ```
 
 ### Configure Tailwind CSS

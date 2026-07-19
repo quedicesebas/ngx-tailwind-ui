@@ -1,6 +1,6 @@
 {
   "name": "@ngx-tailwind-ui/bottom-sheet-modal",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "Angular 22 and TailwindCSS 4 Bottom Sheet Modal",
   "repository": {
     "type": "git",

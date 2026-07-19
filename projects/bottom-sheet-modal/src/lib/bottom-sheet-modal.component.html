@@ -1,12 +1,12 @@
 @for (modal of modals(); track modal) { @if (modal.contentComponent) {
 <!-- container -->
 <div
-  @container
   class="absolute w-svw grid h-dvh grid-cols-1 grid-rows-1 bottom-sheet-container"
 >
   <!-- shade -->
   <div
-    @fade
+    animate.enter="fade-in"
+    animate.leave="fade-out"
     class="col-span-1 col-start-1 row-span-1 row-start-1 w-svw bg-black/60 bottom-sheet-back-drop"
     tauiListenEscKey
     (esc)="modal.canClose && close()"
@@ -16,7 +16,8 @@
 
   <!-- bottom sheet -->
   <div
-    @slideUp
+    animate.enter="slide-in-up"
+    animate.leave="slide-out-down"
     class="col-span-1 col-start-1 row-span-1 row-start-1 self-end md:absolute overflow-hidden md:bottom-0 md:left-0 md:right-0 md:top-0 md:m-auto md:rounded-xl relative md:w-min bottom-sheet"
     [class.rounded-t-none]="fullScreen"
     [class.rounded-t-xl]="!fullScreen"

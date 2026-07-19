@@ -1,11 +1,3 @@
-import {
-  animate,
-  animateChild,
-  query,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { NgComponentOutlet } from '@angular/common';
 import {
   Component,
@@ -27,6 +19,36 @@ import { SafeResizeObserver } from './safe-resize-observer';
   host: { class: 'fixed z-40' },
   templateUrl: './bottom-sheet-modal.component.html',
   styles: `
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .fade-in {
+      animation: fadeIn 300ms forwards;
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    .fade-out {
+      animation: fadeOut 300ms forwards;
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(500px); }
+      to { transform: translateY(0); }
+    }
+    .slide-in-up {
+      animation: slideInUp 350ms cubic-bezier(0.17, 0.89, 0.24, 1.11) forwards;
+    }
+    @keyframes slideOutDown {
+      from { transform: translateY(0); }
+      to { transform: translateY(500px); }
+    }
+    .slide-out-down {
+      animation: slideOutDown 300ms ease-in-out forwards;
+    }
+
     /* On md or more, move close button away from the right border
     Ref: https://csscade.com/can-you-detect-overflow-with-css/ */
     @media (width >= 48rem) {
@@ -50,35 +72,6 @@ import { SafeResizeObserver } from './safe-resize-observer';
     }
   `,
   changeDetection: ChangeDetectionStrategy.Eager,
-  animations: [
-    trigger('fade', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [animate('300ms', style({ opacity: 0 }))]),
-    ]),
-    trigger('slideUp', [
-      transition(':enter', [
-        style({ transform: 'translate(0,500px)' }),
-        animate(
-          '350ms cubic-bezier(0.17, 0.89, 0.24, 1.11)',
-          style({ transform: 'translate(0,0)' })
-        ),
-      ]),
-      transition(':leave', [
-        animate(
-          '300ms ease-in-out',
-          style({ transform: 'translate(0,500px)' })
-        ),
-      ]),
-    ]),
-    trigger('container', [
-      transition(':enter, :leave', [
-        query('@*', animateChild(), { optional: true }),
-      ]),
-    ]),
-  ],
 })
 export class TauiBottomSheetModalComponent {
   // Services
