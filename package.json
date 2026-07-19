@@ -9,7 +9,7 @@
   "description": "Tailwind CSS UI components for Angular",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve demo",
+    "start": "npm run build:all && ng serve demo",
     "serve:ssr:demo": "node dist/demo/server/server.mjs",
     "build:demo": "ng build demo",
     "watch:demo": "ng build demo --watch --configuration development",
@@ -26,7 +26,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^22.0.6",
     "@angular/common": "^22.0.6",
     "@angular/compiler": "^22.0.6",
     "@angular/core": "^22.0.6",
