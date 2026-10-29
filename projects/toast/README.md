@@ -91,7 +91,7 @@ import { TauiToastService } from "@ngx-tailwind-ui/toast";
     <section class="dark:text-slate-300">
       <h1 class="font-bold text-xl mt-4 mb-4">
         Angular Toast Demo
-        <span class="bg-red-500 text-white rounded-full px-3 py-1 text-sm" [class.!bg-green-500]="toastStack().length > 0"> Showing {{ toastStack().length }} toasts </span>
+        <span class="bg-red-500 text-white rounded-full px-3 py-1 text-sm" [class.bg-green-500!]="toastStack().length > 0"> Showing {{ toastStack().length }} toasts </span>
       </h1>
       <p class="mb-2">Simple toast for Angular, using Tailwind CSS.</p>
       <div class="flex gap-2">
