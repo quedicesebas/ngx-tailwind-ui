@@ -32,7 +32,7 @@
       />
       @if (modal.showCloseButton && modal.canClose) {
       <button
-        class="top-2 right-2 bottom-sheet-close-button"
+        class="top-2 right-2 bottom-sheet-close-button cursor-pointer"
         [class.fixed]="fullScreen"
         [class.absolute]="!fullScreen"
         [class]="modal.closeButtonClass ?? 'text-gray-500 dark:text-gray-300'"

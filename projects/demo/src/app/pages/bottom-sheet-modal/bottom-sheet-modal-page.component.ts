@@ -60,7 +60,7 @@ import { BottomSheetModalContentComponent } from './bottom-sheet-modal-content.c
         Angular bottom sheet modal demo
         <span
           class="bg-red-500 text-white rounded-full px-3 py-1 text-sm"
-          [class.!bg-green-500]="currentLayer()"
+          [class.bg-green-500!]="currentLayer()"
           >{{ currentLayer() ? 'opened' : 'closed' }}</span
         >
       </h1>

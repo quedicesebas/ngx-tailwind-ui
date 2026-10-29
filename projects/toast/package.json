@@ -1,6 +1,6 @@
 {
   "name": "@ngx-tailwind-ui/toast",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "Angular 22 and TailwindCSS 4 Toast Component",
   "repository": {
     "type": "git",

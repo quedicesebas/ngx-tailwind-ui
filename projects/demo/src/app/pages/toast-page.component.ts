@@ -61,7 +61,7 @@ import { TauiToastConfig, TauiToastService } from 'toast';
         Angular toast demo
         <span
           class="bg-red-500 text-white rounded-full px-3 py-1 text-sm"
-          [class.!bg-green-500]="toastStack().length > 0"
+          [class.bg-green-500!]="toastStack().length > 0"
           >showing {{ toastStack().length }}</span
         >
       </h1>

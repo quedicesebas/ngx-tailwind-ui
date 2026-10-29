@@ -11,12 +11,12 @@ import { TauiToast, TauiToastService } from './toast.service';
   imports: [NgClass],
   template: `
     <div
-      class="fixed left-0 bottom-0 right-0 z-50 flex flex-col-reverse items-end gap-4 p-4"
+      class="fixed left-0 bottom-0 right-0 z-50 flex flex-col-reverse items-end gap-4 pointer-events-none"
       [class.p-4]="toastStack().length > 0"
     >
       @for (toast of toastStack(); track toast) {
       <div
-        class="w-full md:max-w-[50dvw] rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm dark:text-gray-50 overflow-hidden bg-white dark:bg-gray-800"
+        class="pointer-events-auto w-full md:max-w-[50dvw] rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm dark:text-gray-50 overflow-hidden bg-white dark:bg-gray-800"
         role="alert"
         animate.enter="fade-slide-in"
         animate.leave="fade-slide-out"
@@ -90,7 +90,7 @@ import { TauiToast, TauiToastService } from './toast.service';
           <div class="text-sm font-normal flex-1">{{ toast.config.message }}</div>
           <button
             type="button"
-            class="rounded-lg focus:ring-2 focus:ring-gray-300 inline-flex items-center justify-center h-8 w-8 dark:text-white dark:hover:text-white hover:opacity-75 shrink-0"
+            class="cursor-pointer rounded-lg focus:ring-2 focus:ring-gray-300 inline-flex items-center justify-center h-8 w-8 dark:text-white dark:hover:text-white hover:opacity-75 shrink-0"
             (click)="close(toast)"
             aria-label="Close toast"
           >
